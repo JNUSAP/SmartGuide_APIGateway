@@ -1,0 +1,30 @@
+{
+  "name": "smartguide",
+  "version": "1.0.0",
+  "description": "smartguide backend server",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JNUSAP/SmartGuide_APIGateway.git"
+  },
+  "keywords": [
+    "smartguide"
+  ],
+  "author": "Guideliners",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JNUSAP/SmartGuide_APIGateway/issues"
+  },
+  "homepage": "https://github.com/JNUSAP/SmartGuide_APIGateway#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.2.0"
+  }
+}
