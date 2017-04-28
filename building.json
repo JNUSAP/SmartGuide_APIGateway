@@ -1,0 +1,12 @@
+{
+    "id": "",
+    "BuildingName": "",
+    "NearBuilding": {
+        //BuildingInfo* next;
+    },
+    "GPS": {
+        "latitute": 1234.56,
+        "apptitute": 1234.56
+    },
+    "imagePath": "/image/path"
+}
