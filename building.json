@@ -6,7 +6,7 @@
     },
     "GPS": {
         "latitute": 1234.56,
-        "apptitute": 1234.56
+        "longititute": 1234.56
     },
     "imagePath": "/image/path"
 }
