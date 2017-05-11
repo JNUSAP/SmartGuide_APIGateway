@@ -1,3 +1,4 @@
+var BdgSearchModule = require("./BdgSearchModule.js");
 exports.init = function(app) {
     app.get('/',
         function(req, res) {
