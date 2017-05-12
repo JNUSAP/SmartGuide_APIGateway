@@ -1,18 +1,19 @@
 //var RequestCache = require("./RequesCache.js");
-//var ImgProvider = require("./ImgProvider.js");
-//var DBBdgmodule = require("./DBBdgModule.js");
+var ImgProvider = require("./ImgProvider.js");
+var DBBdgmodule = require("./DBBdgModule.js");
 exports.getKakaoResponse = function() {
+    var BdgInfo = DBBdgModule.getBdgInfo();
     return {
         "message":{
-                "text": "안녕하세요.",
+                "text": BdgInfo.name,
                 "photo": {
-                    "url": "https://hello.photo.src",
+                    "url": ImageProvider.getImg(DbgInfo.imgPath),
                     "width": 640,
                     "height": 480
                 },
                 "message_button": {
                     "label": "반갑습니다.",
-                    "url": "http://hello.world.com/example"
+                    "url": ""+:DbgInfo.id
                 }
         }
     };
