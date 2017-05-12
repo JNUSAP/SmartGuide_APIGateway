@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/JNUSAP/SmartGuide_APIGateway#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mysql": "^2.13.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
