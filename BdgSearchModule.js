@@ -1,6 +1,6 @@
 //var RequestCache = require("./RequesCache.js");
 var ImgProvider = require("./ImgProvider.js");
-var DBBdgmodule = require("./DBBdgModule.js");
+var DBBdgModule = require("./DBBdgModule.js");
 exports.getKakaoResponse = function() {
     var BdgInfo = DBBdgModule.getBdgInfo();
     return {
