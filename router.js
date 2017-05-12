@@ -1,5 +1,8 @@
 var BdgSearchModule = require("./BdgSearchModule.js");
+var bodyParser = require('body-parser');
 exports.init = function(app) {
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.get('/',
         function(req, res) {
             res.setHeader('Content-Type', 'application/json');
@@ -13,20 +16,9 @@ exports.init = function(app) {
     app.post('/message',
         function(req, res) {
             res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify({
-                    "message": {
-                        "text": "테스트 중입니다.",
-                        "photo": {
-                            "url": "",
-                            "width": "",
-                            "height": ""
-                        },
-                        "message_button": {
-
-                        }
-                    }
-                } // 임시 메시지. MessageProvider.js로
-            ));
+            res.send(
+                JSON.stringify(BdgSearchModule.getKakaoMessage()) // 임시 메시지. MessageProvider.js로
+            );
         });
     app.get('/keyboard',
         function(req, res) {
