@@ -13,7 +13,7 @@ exports.getKakaoResponse = function() {
                 },
                 "message_button": {
                     "label": "반갑습니다.",
-                    "url": ""+:DbgInfo.id
+                    "url": ""+:BdgInfo.id
                 }
         }
     };
