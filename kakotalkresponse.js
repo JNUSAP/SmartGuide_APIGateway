@@ -1,6 +1,6 @@
 var DBModule = require('./db.js');
 
-getresponse = function(request) {
+var getresponse = function(request) {
 
     var responseInfo = DBMoudle.getBuildingInfo(request.text);
     return {
@@ -8,4 +8,4 @@ getresponse = function(request) {
         'photo': responseInfo.getPhotoPath(),
         'url': responseInfo.getUrl()
     };
-}
+};
