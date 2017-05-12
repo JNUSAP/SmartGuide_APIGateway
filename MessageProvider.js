@@ -1,4 +1,7 @@
-var BdgSearchModule = require(. / BdgSearchModule.js);
-export.getResponse = function(messageType) {
+var BdgSearchModule = require("./BdgSearchModule.js");
+exports.getResponse = function(req, messageType) {
     if (messageType == "kakao")
+        BdgSearchModule.getKakaoResponse();
+    if (messageType == "sms")
+        BdgSearchModule.getSimpleResponse();
 };
