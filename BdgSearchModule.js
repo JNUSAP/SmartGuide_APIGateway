@@ -19,5 +19,10 @@ exports.getKakaoResponse = function() {
     };
 };
 exports.getSimpleResponse = function() {
-
+    var BdgInfo = DBBdgModule.getBdgInfo();
+    return {
+        "message": {
+            "text": ":" + BdgInfo.id;
+        }
+    };
 };
