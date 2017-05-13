@@ -7,7 +7,7 @@ exports.getKakaoResponse = function() {
         "message": {
             "text": BdgInfo.name,
             "photo": {
-                "url": null, // ImgProvider.getImg(DbgInfo.imgPath),
+                "url": "/0", // ImgProvider.getImg(DbgInfo.imgPath)0
                 "width": 640,
                 "height": 480
             },
