@@ -1,4 +1,5 @@
 var MessageProvider = require("./MessageProvider.js");
+var ImgProvider = require("")
 var bodyParser = require('body-parser');
 exports.init = function(app) {
     app.use(bodyParser.json());
@@ -18,6 +19,20 @@ exports.init = function(app) {
             res.setHeader('Content-Type', 'application/json');
             res.send(
                 JSON.stringify(MessageProvider.getResponse("kakao")) // 임시 메시지. MessageProvider.js로
+            );
+        });
+    app.get('/suggest',
+        function(req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(
+                JSON.stringify(MessageProvider.getResponse("kakao")) // 임시 메시지. MessageProvider.js로
+            );
+        });
+    app.post('/suggest/bdg',
+        function(req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(
+
             );
         });
     /*    app.get('/keyboard',

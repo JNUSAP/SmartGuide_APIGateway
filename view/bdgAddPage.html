@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>건물 추가 페이지</title>
 </head>
 
@@ -10,28 +11,31 @@
     <button onclick="getLocation()">Try It</button>
     <p id="demo"></p>
     <script>
-var x = document.getElementById("demo");
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude; 
-}
-</script>
-<form action="/addBdg" method="POST">
-건물 이름 : <br>
-<input type="text">
-<br>
-건물 사진 : <br>
-<br>
+        var x = document.getElementById("demo");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude;
+        }
+    </script>
+    <form action="/suggest/bdg" method="POST">
+        건물 이름 : <br>
+        <input type="text"> 건물 위도: <br>
+        <input type="text"> 건물 경도: <br>
+        <input type="text">
+        <br> 건물 사진 : <br>
+        <br>
         <script>
-            $(function(){
-                $('#camera').change(function(e){
+            $(function() {
+                $('#camera').change(function(e) {
                     $('#pic').attr('src', URL.createObjectURL(e.target.files[0]));
                 });
             });
@@ -39,8 +43,9 @@ function showPosition(position) {
         <input type="file" id="camera" name="camera" capture="camera" accept="image/*" />
         <br/>
         <img id="pic" style="width:100%;" />
-<br>
-<input type="submit" value="Submit">
-</form>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
+
 </html>

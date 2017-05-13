@@ -10,6 +10,10 @@ function httpGetAsync(theUrl, callback) {
 
 function setSuggestList(responseText) {
     var suggestList = JSON.parse(responseText);
+    while (suggestList != null) {
+        suggestList
+    }
+
 }
 
 function loadSuggestList() {
