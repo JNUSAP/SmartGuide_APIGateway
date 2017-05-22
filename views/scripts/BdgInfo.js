@@ -1,4 +1,4 @@
-export function getBdgInfo(id, func) {
+function getBdgInfo(id, func) {
     var req = new XMLHttpRequest();
     req.open('GET', '/bdg/' + id);
     req.send(null);

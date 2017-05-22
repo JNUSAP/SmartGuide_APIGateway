@@ -67,6 +67,9 @@ function addViews(app) {
     app.get('/views/scripts/suggest.js', function(req, res) {
         res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
     });
+    app.get('/views/scripts/BdgInfo.js', function(req, res) {
+        res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
+    });
     app.get('/search', function(req, res) {
         res.render('searchPage');
     });

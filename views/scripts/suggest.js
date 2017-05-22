@@ -1,4 +1,3 @@
-import { getBdgInfo } from "./BdgInfo.js";
 var suggestBoard = document.getElementsByName("suggestBoard")[0];
 var fill = filler(0);
 window.onload = init();
@@ -48,4 +47,21 @@ function filler(id) {
             id++;
         }
     }
+}
+//BdgInfo.js
+function getBdgInfo(id, func) {
+    var req = new XMLHttpRequest();
+    req.open('GET', '/bdg/' + id);
+    req.send(null);
+    req.onreadystatechange = function(aEvt) {
+        if (req.readyState == 4 && req.status == 200) {
+            console.log("success.");
+            console.log(req.responseText);
+            info = req.responseText;
+            return func(info);
+        } else {
+            console.log("bdg request err.");
+            return -1;
+        }
+    };
 }
