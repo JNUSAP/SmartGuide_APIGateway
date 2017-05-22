@@ -13,7 +13,7 @@ exports.getKakaoResponse = function() {
             },
             "message_button": {
                 "label": "반갑습니다.",
-                "url": ":" + BdgInfo.id
+                "url": ":" //+ BdgInfo.id
             }
         }
     };
@@ -22,7 +22,7 @@ exports.getSimpleResponse = function() {
     var BdgInfo = DBBdgModule.getBdgInfo();
     return {
         "message": {
-            "text": ":" + BdgInfo.id;
+            "text": ":" // + BdgInfo.id;
         }
     };
 };

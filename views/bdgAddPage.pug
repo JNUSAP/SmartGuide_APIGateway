@@ -1,0 +1,27 @@
+extends ./layout.pug
+block title
+    title 건물 추가 페이지
+block content
+    p 건물을 등록합니다.
+    script.
+        window.onload = getLocation();
+
+        function getLocation() {
+                navigator.geolocation.getCurrentPosition(setPosition);
+        }
+        function setPosition(position) {
+            data.latitude.value=position.coords.latitude;
+            data.longitude.value=position.coords.longitude;
+        }
+    form(id="data" method="post" enctype="multipart/form-data" action="bdg/img")
+        p Latitude:
+        input(type="text" name="latitude")
+        p Longitude:
+        input(type="text" name="longitude")
+        p
+        input(type="text" name="name" placeholder="건물 이름을 입력하세요")
+        p
+        input(type="text" name="name" placeholder="별명을 입력하세요")
+        p 
+        input(type="file" name="img" placeholder="이미지")
+        

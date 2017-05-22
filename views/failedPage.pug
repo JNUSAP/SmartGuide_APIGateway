@@ -1,0 +1,10 @@
+extends ./layout.pug
+block title
+    title 실패!
+block content
+    h1 검색에 실패했습니다. 어떤 건물이 있는지 알려주시겠어요?
+    
+    form(action="/suggestBdg" method="POST")
+        input(type="text")
+        input(type="textarea" rows=100 cols=40)
+        input(type="submit" value="Submit")
