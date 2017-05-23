@@ -3,25 +3,56 @@ block title
     title 건물 추가 페이지
 block content
     p 건물을 등록합니다.
-    script.
-        window.onload = getLocation();
-
-        function getLocation() {
-                navigator.geolocation.getCurrentPosition(setPosition);
-        }
-        function setPosition(position) {
-            data.latitude.value=position.coords.latitude;
-            data.longitude.value=position.coords.longitude;
-        }
+    div(id="map" style="width:500px;height:400px;")
     form(id="data" method="post" enctype="multipart/form-data" action="bdg/img")
         p Latitude:
-        input(type="text" name="latitude")
+        input(type="text" name="latitude" onblur="mapChanged()")
         p Longitude:
-        input(type="text" name="longitude")
+        input(type="text" name="longitude" onblur="mapChanged()")
         p
         input(type="text" name="name" placeholder="건물 이름을 입력하세요")
         p
         input(type="text" name="name" placeholder="별명을 입력하세요")
         p 
         input(type="file" name="img" placeholder="이미지")
-        
+
+        script(src="//apis.daum.net/maps/maps3.js?apikey=5042f12f3f6b34915502a37a3194d5d2")
+        script.
+            window.onload = init();
+            var container = document.getElementById('map');
+            var options = {
+                center : new daum.maps.LatLng(35.15, 126.85),
+                level : 3
+            };
+            var map = new daum.maps.Map(container, options);
+            var marker = new daum.maps.Marker({
+                map: map,
+                draggable:true,
+                position: new daum.maps.LatLng(35.15, 126.570667)
+            });
+            daum.maps.event.addListener(marker, 'dragend', function() {
+                var position = marker.getPosition();
+                data.latitude.value=position.getLat();
+                data.longitude.value=position.getLng();
+            });
+            
+            function init(){
+                setPosition();
+            }
+            function setPosition(position) {
+                 navigator.geolocation.getCurrentPosition(function(position){
+                    data.latitude.value=position.coords.latitude;
+                    data.longitude.value=position.coords.longitude;
+                    return refreshMap(position.coords.latitude,position.coords.longitude);
+                 });
+            }
+            function refreshMap(lat,long){
+                var position = new daum.maps.LatLng(lat,long);
+                map.setCenter(position);
+                marker.setPosition(position);
+            }
+            function mapChanged(){
+                return refreshMap(data.latitude.value
+                        ,data.longitude.value);
+            }
+            
