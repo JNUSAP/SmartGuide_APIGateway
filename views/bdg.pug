@@ -2,8 +2,14 @@ extends ./layout.pug
 block title
     title #{name}
 block content
-    div(id=bdgTitle)
+    div(id=bdgTitle) #{name}
     div(id=bdgImg)
+        img(src=""+imgPath)
     div(id="map" style="width:500px;height:400px;")
     div(id="nearBdgList")
+    p(id="latitude" hidden="true") #{GPS.latitude}
+    p(id="longitude" hidden="true") #{GPS.longitude}
+    script.
+        
+
     

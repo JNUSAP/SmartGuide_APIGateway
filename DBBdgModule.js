@@ -7,7 +7,7 @@ var Mock = {
     },
     "imgPath": "./abcde.jpg"
 };
-exports.getBdgInfo = function(bdgName) {
+exports.getInfo = function(bdgName) {
     return Mock;
 };
 exports.getId = function(bdgName) {
@@ -19,9 +19,24 @@ exports.getName = function(id) {
 exports.getImgPath = function(id) {
     return Mock.imgPath;
 };
-exports.getnearBdgList = function(BdgId) {
+exports.getNearBdgList = function(BdgId) {
     return [Mock, Mock, Mock];
 }
 exports.getWayfindData = function(start, end) {
     return [Mock, Mock, Mock];
+};
+
+exports.setInfo = function(bdgInfo) {
+    console.log(bdgInfo);
+};
+exports.setName = function(id, name) {
+    console.log(id);
+    console.log(name);
+};
+exports.setImgPath = function(id, path) {
+    console.log(id);
+    console.log(path);
+};
+exports.setNearBdgList = function(id) {
+    console.log(id);
 };

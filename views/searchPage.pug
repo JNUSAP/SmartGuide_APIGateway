@@ -4,6 +4,6 @@ block title
 block content
     h1 스마트 가이드
     p 검색을 원하는 건물 이름을 입력하세요!
-    form(action="bdgInfo" method="GET")
-    input(type="text" name="BdgName" class="searchBar")
-    input(type="submit" class="searchButton" value="검색")
+    form(action="/bdgInfo" method="GET")
+        input(type="text" name="BdgName" class="searchBar")
+        input(type="submit" class="searchButton" value="검색")

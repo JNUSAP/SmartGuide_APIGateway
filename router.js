@@ -1,6 +1,8 @@
 const MessageProvider = require("./MessageProvider.js");
 const bodyParser = require('body-parser');
 const path = require("path");
+const url = require('url');
+const DBBdgModule = require("./DBBdgModule.js");
 exports.init = function(app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -10,21 +12,29 @@ exports.init = function(app) {
 };
 
 function addKakaoResponse(app) {
-    app.get('/keyboard',
-        function(req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify({ "type": "text" }));
-        });
-    app.post('/message',
-        function(req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(
-                JSON.stringify(MessageProvider.getResponse("kakao")) // 임시 메시지. MessageProvider.js로
-            );
-        });
+    app.get('/keyboard', function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({ "type": "text" }));
+    });
+    app.post('/message', function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(
+            JSON.stringify(MessageProvider.getResponse("kakao")) // 임시 메시지. MessageProvider.js로
+        );
+    });
 }
 
 function addBdgREST(app) {
+    app.get('/bdgInfo', function(req, res) {
+        var bdgName = req.query.bdgName;
+        var bdgInfo = DBBdgModule.getInfo(bdgName);
+        res.render('bdg', bdgInfo);
+    });
+    app.get('/bdg/:id', function(req, res) {
+        var id = req.params.id;
+
+        res.send
+    });
 
 }
 
