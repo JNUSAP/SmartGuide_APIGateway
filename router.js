@@ -9,6 +9,7 @@ exports.init = function(app) {
     addViews(app);
     addBdgREST(app);
     addSuggestREST(app);
+    addFiles(app);
 };
 
 function addKakaoResponse(app) {
@@ -32,8 +33,8 @@ function addBdgREST(app) {
     });
     app.get('/bdg/:id', function(req, res) {
         var id = req.params.id;
-
-        res.send
+        var bdgInfo = DBBdgModule.getInfo(id);
+        res.render('bdg', bdgInfo);
     });
 
 }
@@ -74,13 +75,26 @@ function addViews(app) {
     app.get('/suggest', function(req, res) {
         res.render('suggestPage');
     });
+
+    app.get('/search', function(req, res) {
+        res.render('searchPage');
+    });
+}
+
+function addFiles(app) {
+    //Whitelist 방식
+    //브라우저 Javascripts
     app.get('/views/scripts/suggest.js', function(req, res) {
         res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
     });
     app.get('/views/scripts/BdgInfo.js', function(req, res) {
         res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
     });
-    app.get('/search', function(req, res) {
-        res.render('searchPage');
+    app.get('/views/scripts/BdgInfo.js', function(req, res) {
+        res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
+    });
+    //CSS
+    app.get('/views/css/', function(req, res) {
+
     });
 }

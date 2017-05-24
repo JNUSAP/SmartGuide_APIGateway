@@ -5,7 +5,7 @@ var Mock = {
         "latitude": 10.123,
         "longitude": 10.234
     },
-    "imgPath": "./abcde.jpg"
+    "imgPath": "abcde.jpg"
 };
 exports.getInfo = function(bdgName) {
     return Mock;
