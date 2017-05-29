@@ -40,14 +40,14 @@ function addBdgREST(app) {
 }
 
 function addSuggestREST(app) {
-    app.get('/suggest',
+    app.get('/suggestBdg',
         function(req, res) {
             res.setHeader('Content-Type', 'application/json');
             res.send(
                 JSON.stringify(MessageProvider.getResponse("kakao")) // 임시 메시지. MessageProvider.js로
             );
         });
-    app.post('/suggest/bdg',
+    app.post('/suggestBdg',
         function(req, res) {
             res.setHeader('Content-Type', 'application/json');
             res.send(
@@ -58,11 +58,9 @@ function addSuggestREST(app) {
 
 function addViews(app) {
     app.set('view engine', 'pug');
-    app.get('/',
-        function(req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(flag['xormagic']));
-        });
+    app.get('/', function(req, res) {
+        res.render('searchPage');
+    });
     app.get('/bdgAdd', function(req, res) {
         res.render('bdgAddPage');
     });

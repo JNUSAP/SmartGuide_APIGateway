@@ -1,3 +1,0 @@
-exports.postSuggest = function(req) {
-
-};
