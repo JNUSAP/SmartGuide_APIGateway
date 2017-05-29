@@ -31,6 +31,14 @@ function addBdgREST(app) {
         var bdgInfo = DBBdgModule.getInfo(bdgName);
         res.render('bdg', bdgInfo);
     });
+    app.post('/bdg', function(req, res) {
+        console.log(req.body.latitude);
+        console.log(req.body.longitude);
+        console.log(req.body.name);
+        console.log(req.body.nickname);
+        console.log(req.body.img);
+
+    });
     app.get('/bdg/:id', function(req, res) {
         var id = req.params.id;
         var bdgInfo = DBBdgModule.getInfo(id);
