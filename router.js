@@ -37,6 +37,7 @@ function addBdgREST(app) {
         console.log(req.body.name);
         console.log(req.body.nickname);
         console.log(req.body.img);
+        res.send(req.body);
 
     });
     app.get('/bdg/:id', function(req, res) {
