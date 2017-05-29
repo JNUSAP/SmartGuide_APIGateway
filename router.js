@@ -37,8 +37,9 @@ function addBdgREST(app) {
         res.render('bdg', bdgInfo);
     });
     app.post('/bdg', function(req, res) {
-        var bdgInfo = new Building(null, req.body.name, req.file.path, req.body.longitude, req.body.latitude, "");
-        DBBdgModule.setInfo(bdgInfo);
+        var bdgInfo = new Building(null, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
+        console.log(parseFloat(req.body.longitude), parseFloat(req.body.latitude));
+	DBBdgModule.setInfo(bdgInfo);
         res.status(204).send(req.body);
     });
     app.get('/bdg/:id', function(req, res) {

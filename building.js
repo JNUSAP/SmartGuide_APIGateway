@@ -4,7 +4,7 @@ function Building(id, name, path, longitude, latitude, msg1) {
     this.buildingImage = path;
     this.buildingLongitude = longitude;
     this.buildingLatitude = latitude;
-    this.buildingMsg1 = msg1;
+    this.buildingMsg1 = "tempmessage";
 }
 
 module.exports = Building;
