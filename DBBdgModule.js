@@ -1,3 +1,4 @@
+const connector = require('./DBConnector.js');
 var Mock = {
     "id": 0,
     "name": "공대 7호관",
@@ -27,7 +28,9 @@ exports.getWayfindData = function(start, end) {
 };
 
 exports.setInfo = function(bdgInfo) {
-    console.log(bdgInfo);
+    var query = util.format('INSERT INTO buildingInfo(buildingName, buildingImage,buildingLongitude, buildingLatitude, buildingMsg1) VALUES (%s, %s,%lf, %lf, %s);', bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1);
+    connector.query(query);
+    console.log(query);
 };
 exports.setName = function(id, name) {
     console.log(id);
