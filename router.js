@@ -93,8 +93,4 @@ function addFiles(app) {
     app.get('/views/scripts/BdgInfo.js', function(req, res) {
         res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
     });
-    //CSS
-    app.get('/views/css/', function(req, res) {
-
-    });
 }
