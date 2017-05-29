@@ -1,19 +1,32 @@
 const connector = require('./DBConnector.js');
-const building = require('./building.js');
+const Building = require('./building.js');
 const util = require('util');
-var Mock = building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
+var Mock = new Building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
 
 exports.getInfo = function(bdgName) {
-    return Mock;
+    var query = util.format('SELECT * FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
+    var result = connector.query(query);
+    console.log(result);
+    var building = new Building(result.buildingId, result.buildingName, result.buildingImage, result.buildingLongitude, result.buildingLatitude, building.buildingMsg1);
+    return building;
 };
 exports.getId = function(bdgName) {
-    return Mock.id;
+    var query = util.format('SELECT buildingId FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
+    var result = connector.query(query);
+    console.log(result);
+    return result[0];
 };
 exports.getName = function(id) {
-    return Mock.name;
+    var query = util.format('SELECT buildingName FROM buildingInfo WHERE buildingId = \'%d\';', id);
+    var result = connector.query(query);
+    console.log(result);
+    return result[0];
 };
 exports.getImgPath = function(id) {
-    return Mock.imgPath;
+    var query = util.format('SELECT buildingImage FROM buildingInfo WHERE buildingId = \'%d\';', id);
+    var result = connector.query(query);
+    console.log(result);
+    return result[0];
 };
 exports.getNearBdgList = function(BdgId) {
     return [Mock, Mock, Mock];
@@ -25,7 +38,6 @@ exports.getWayfindData = function(start, end) {
 exports.setInfo = function(bdgInfo) {
     var query = util.format('INSERT INTO buildingInfo(buildingName, buildingImage,buildingLongitude, buildingLatitude, buildingMsg1) VALUES (\'%s\', \'%s\',%d, %d, \'%s\');', bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1);
     connector.query(query);
-    console.log(query);
 };
 exports.setName = function(id, name) {
     console.log(id);

@@ -10,10 +10,10 @@ var connection = mysql.createConnection({
 connection.connect();
 
 exports.query = function(query) {
-    return connection.query(query, function(err, rows, fields) {
+    return connection.query(query, function(err, result) {
         if (err)
             console.log("err occurred :" + err.message);
         else
-            return [rows, fields];
+            return result;
     });
 };
