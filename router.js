@@ -3,9 +3,13 @@ const bodyParser = require('body-parser');
 const path = require("path");
 const url = require('url');
 const DBBdgModule = require("./DBBdgModule.js");
+const multer = require('multer');
+
 exports.init = function(app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(multer({dest:'./img'}).single('img'));
+    addKakaoResponse(app);
     addViews(app);
     addBdgREST(app);
     addSuggestREST(app);
@@ -32,7 +36,8 @@ function addBdgREST(app) {
         res.render('bdg', bdgInfo);
     });
     app.post('/bdg', function(req, res) {
-        console.log(req.body.latitude);
+        console.log(req.body);
+	console.log(req.body.latitude);
         console.log(req.body.longitude);
         console.log(req.body.name);
         console.log(req.body.nickname);
