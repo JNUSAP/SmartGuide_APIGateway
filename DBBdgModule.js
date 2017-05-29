@@ -1,13 +1,7 @@
 const connector = require('./DBConnector.js');
-var Mock = {
-    "id": 0,
-    "name": "공대 7호관",
-    "GPS": {
-        "latitude": 10.123,
-        "longitude": 10.234
-    },
-    "imgPath": "abcde.jpg"
-};
+const building = require('./building.js');
+var Mock = building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
+
 exports.getInfo = function(bdgName) {
     return Mock;
 };
