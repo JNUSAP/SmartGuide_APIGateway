@@ -1,6 +1,6 @@
 const connector = require('./DBConnector.js');
 const building = require('./building.js');
-const uill = require('utll');
+const util = require('util');
 var Mock = building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
 
 exports.getInfo = function(bdgName) {
@@ -23,7 +23,7 @@ exports.getWayfindData = function(start, end) {
 };
 
 exports.setInfo = function(bdgInfo) {
-    var query = util.format('INSERT INTO buildingInfo(buildingName, buildingImage,buildingLongitude, buildingLatitude, buildingMsg1) VALUES (%s, %s,%lf, %lf, %s);', bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1);
+    var query = util.format('INSERT INTO buildingInfo(buildingName, buildingImage,buildingLongitude, buildingLatitude, buildingMsg1) VALUES (%s, %s,%f, %f, %s);', bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1);
     connector.query(query);
     console.log(query);
 };

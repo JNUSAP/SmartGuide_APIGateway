@@ -4,7 +4,7 @@ const path = require("path");
 const url = require('url');
 const DBBdgModule = require("./DBBdgModule.js");
 const multer = require('multer');
-const building = require('./building.js');
+const Building = require('./building.js');
 
 exports.init = function(app) {
     app.use(bodyParser.json());
@@ -37,7 +37,7 @@ function addBdgREST(app) {
         res.render('bdg', bdgInfo);
     });
     app.post('/bdg', function(req, res) {
-        var bdgInfo = new building(null, req.body.name, req.file.path, req.body.longitude, req.body.latitude, "");
+        var bdgInfo = new Building(null, req.body.name, req.file.path, req.body.longitude, req.body.latitude, "");
         DBBdgModule.setInfo(bdgInfo);
         res.status(204).send(req.body);
     });
