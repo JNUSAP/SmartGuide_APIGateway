@@ -1,5 +1,6 @@
 const connector = require('./DBConnector.js');
 const building = require('./building.js');
+const uill = require('utll');
 var Mock = building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
 
 exports.getInfo = function(bdgName) {
