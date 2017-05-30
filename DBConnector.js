@@ -1,19 +1,19 @@
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-    host: '52.78.17.235',
+    host: 'ec2-52-78-17-235.ap-northeast-2.compute.amazonaws.com',
     user: 'dbteam',
     password: 'dbteam',
     port: 3306,
-    database: 'mainBuilding'
+    database: 'mainBuilding',
 });
-
 connection.connect();
 
-exports.query = function(query) {
-    return connection.query(query, function(err, result) {
+
+exports.query = function(query, callback) {
+    connection.query(query, function(err, result) {
         if (err)
             console.log("err occurred :" + err.message);
-        else
-            return result;
+
+        if (callback != undefined) return callback(result[0]);
     });
 };

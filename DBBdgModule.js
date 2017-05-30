@@ -3,12 +3,17 @@ const Building = require('./building.js');
 const util = require('util');
 var Mock = new Building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
 
-exports.getInfo = function(bdgName) {
-    var query = util.format('SELECT * FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
-    var result = connector.query(query);
-    console.log(result);
-    var building = new Building(result.buildingId, result.buildingName, result.buildingImage, result.buildingLongitude, result.buildingLatitude, building.buildingMsg1);
-    return building;
+exports.getInfo = function(bdgName, callback) {
+    if (Number.isInteger(bdgName)) // bdgId check
+        var query = util.format('SELECT * FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
+    else
+        var query = util.format('SELECT * FROM buildingInfo WHERE buildingId = %d;', bdgName);
+
+    return connector.query(query, function(result) {
+        console.log(result);
+        var building = new Building(result.buildingId, result.buildingName, result.buildingImage + '.jpg', result.buildingLongitude, result.buildingLatitude, result.buildingMsg1);
+        return callback(building);
+    });
 };
 exports.getId = function(bdgName) {
     var query = util.format('SELECT buildingId FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);

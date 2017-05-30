@@ -1,14 +1,14 @@
-extends ./layout.pug
+extends ./userlayout.pug
 block title
-    title #{name}
+    title #{buildingName}
 block content
-    div(id=bdgTitle) #{name}
+    div(id=bdgTitle) #{buildingName}
     div(id=bdgImg)
-        img(src="./img/"+imgPath)
+        img(src="./img/"+buildingImage)
     div(id="map" style="width:500px;height:400px;")
     div(id="nearBdgList")
-    p(id="latitude" hidden="true") #{GPS.latitude}
-    p(id="longitude" hidden="true") #{GPS.longitude}
+    p(id="latitude" hidden="true") #{buildingLongitude}
+    p(id="longitude" hidden="true") #{buildingLatitude}
     script.
         
 

@@ -5,17 +5,25 @@ const url = require('url');
 const DBBdgModule = require("./DBBdgModule.js");
 const multer = require('multer');
 const Building = require('./building.js');
-
 exports.init = function(app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(multer({ dest: './img' }).single('img'));
+    addtestRoutine(app);
     addKakaoResponse(app);
     addViews(app);
     addBdgREST(app);
     addSuggestREST(app);
     addFiles(app);
 };
+
+function addtestRoutine(app) {
+    app.get('/db/:id', function(req, res) {
+        var id = req.params.id;
+        res.send(JSON.stringify(DBBdgModule.getInfo(id)));
+
+    });
+}
 
 function addKakaoResponse(app) {
     app.get('/keyboard', function(req, res) {
@@ -38,14 +46,16 @@ function addBdgREST(app) {
     });
     app.post('/bdg', function(req, res) {
         var bdgInfo = new Building(null, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
-        console.log(parseFloat(req.body.longitude), parseFloat(req.body.latitude));
         DBBdgModule.setInfo(bdgInfo);
-        res.status(204).send(req.body);
+        res.status(204).send();
     });
     app.get('/bdg/:id', function(req, res) {
         var id = req.params.id;
-        var bdgInfo = DBBdgModule.getInfo(id);
-        res.render('bdg', bdgInfo);
+        DBBdgModule.getInfo(id, function(building) {
+            var bdgInfo = building;
+            console.log(bdgInfo);
+            res.render('bdg', bdgInfo);
+        });
     });
 
 }
@@ -93,13 +103,9 @@ function addViews(app) {
 function addFiles(app) {
     //Whitelist 방식
     //브라우저 Javascripts
+
     app.get('/views/scripts/suggest.js', function(req, res) {
         res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
     });
-    app.get('/views/scripts/BdgInfo.js', function(req, res) {
-        res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
-    });
-    app.get('/views/scripts/BdgInfo.js', function(req, res) {
-        res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
-    });
+
 }
