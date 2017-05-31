@@ -1,12 +1,12 @@
-function KakaoResponse(message) {
-    if (!(message instanceof KakaoMessage)) return NullKakaoResponse();
-    this.message = message;
+function KakaoResponse(id, name, imgPath) {
+    if (id == -1)
+        return NullKakaoResponse();
+    this.message = new KakaoMessage(id, name, imgPath);
     this.keyboard = {
         "type": "text"
     };
 }
 
-function isInvalidMessage(message) {}
 
 function NullKakaoResponse() {
     console.log(arguments.callee.callr.toString() +
@@ -19,16 +19,21 @@ function NullKakaoResponse() {
     };
 }
 
-function KakaoMessage(text, photo, message_button) {
-    this.text = text;
-    this.photo = new Photo(photo);
-    this.message_button = message_button;
+function KakaoMessage(id, name, imgPath) {
+    this.text = name;
+    this.photo = new Photo(imgPath);
+    this.message_button = new MessageButton(id);
 }
 
-function Photo(url, width, height) {
-    this.url = url;
-    this.width = width;
-    this.height = height;
+function MessageButton(id) {
+    this.label = "상세 정보";
+    this.url = "/bdg/id";
+}
+
+function Photo(imgPath) {
+    this.url = imgPath;
+    this.width = 640;
+    this.height = 480;
 }
 /*
 {
@@ -54,3 +59,4 @@ function Photo(url, width, height) {
   }
 }
 */
+module.exports = KakaoResponse;

@@ -1,28 +1,19 @@
 //var RequestCache = require("./RequesCache.js");
 var ImgProvider = require("./ImgProvider.js");
 var DBBdgModule = require("./DBBdgModule.js");
-exports.getKakaoResponse = function() {
-    var BdgInfo = DBBdgModule.getBdgInfo();
+var KakaoResponse = require("./kakaotalkresponse.js");
+var Building = require("./building.js");
+exports.getKakaoResponse = function(req) {
+    if (req.type != text) return new KakaoResponse(-1); // 사진->null
+    var BdgInfo = DBBdgModule.getInfoByNickName(req.text);
+
+    return new KakaoResponse(BdgInfo.BuildingId, BdgInfo.BuildingName, BdgInfo);
+}
+exports.getSimpleResponse = function(req) {
+    var BdgId = DBBdgModule.getIdByNickName(req.text);
     return {
         "message": {
-            "text": BdgInfo.name,
-            "photo": {
-                "url": "/0", // ImgProvider.getImg(DbgInfo.imgPath)0
-                "width": 640,
-                "height": 480
-            },
-            "message_button": {
-                "label": "반갑습니다.",
-                "url": ":" //+ BdgInfo.id
-            }
-        }
-    };
-};
-exports.getSimpleResponse = function() {
-    var BdgInfo = DBBdgModule.getBdgInfo();
-    return {
-        "message": {
-            "text": ":" // + BdgInfo.id;
+            "text": BdgId
         }
     };
 };

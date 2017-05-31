@@ -33,7 +33,7 @@ function addKakaoResponse(app) {
     app.post('/message', function(req, res) {
         res.setHeader('Content-Type', 'application/json');
         res.send(
-            JSON.stringify(MessageProvider.getResponse("kakao")) // 임시 메시지. MessageProvider.js로
+            JSON.stringify(MessageProvider.getResponse("kakao", req.body))
         );
     });
 }

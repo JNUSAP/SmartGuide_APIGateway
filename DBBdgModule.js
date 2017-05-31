@@ -9,19 +9,17 @@ exports.getInfo = function(bdgName, callback) {
     else
         var query = util.format('SELECT * FROM buildingInfo WHERE buildingId = %d;', bdgName);
 
-    return connector.query(query, function(result) {
-        console.log(result);
-        var building = new Building(result.buildingId, result.buildingName, result.buildingImage + '.jpg', result.buildingLongitude, result.buildingLatitude, result.buildingMsg1);
-        return callback(building);
-    });
+    var result = connector.query(query);
+    var building = new Building(result.buildingId, result.buildingName, result.buildingImage, result.buildingLongitude, result.buildingLatitude, result.buildingMsg1);
+    return building;
 };
 exports.getId = function(bdgName) {
     var query = util.format('SELECT buildingId FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
     var result = connector.query(query);
-    console.log(result);
-    return result[0];
+    if (typeof(result) === Number) return result;
+    else return -1;
 };
-exports.getName = function(id) {
+exports.getOriginName = function(id) {
     var query = util.format('SELECT buildingName FROM buildingInfo WHERE buildingId = \'%d\';', id);
     var result = connector.query(query);
     console.log(result);

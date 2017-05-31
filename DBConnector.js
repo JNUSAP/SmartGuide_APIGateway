@@ -9,11 +9,17 @@ var connection = mysql.createConnection({
 connection.connect();
 
 
-exports.query = function(query, callback) {
-    connection.query(query, function(err, result) {
-        if (err)
-            console.log("err occurred :" + err.message);
+exports.query = function(query) {
+    new Promise(function(resolve, reject) {
+        connection.query(query, function(err, result) {
+            if (err) {
+                console.log("err occurred :" + err.message)
 
-        if (callback != undefined) return callback(result[0]);
+                reject(err);
+            } else
+                resolve(result[0]);
+        });
+    }).then(function(result) {
+        return result;
     });
 };
