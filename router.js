@@ -28,13 +28,15 @@ function addtestRoutine(app) {
 
 function addKakaoResponse(app) {
     app.get('/keyboard', function(req, res) {
-        console.log("/keyboard:" + req);
+        console.log("/keyboard:");
+	console.log(req.body);
         res.json({ "type": "text" });
     });
     app.post('/message', function(req, res) {
-        console.log("/message:" + req);
+        console.log("/message:");
+	console.log(req.body);
         res.setHeader('Content-Type', 'application/json');
-        MessageProvider.getResponse("kakao", req, function(result) {
+        MessageProvider.getResponse("kakao", req.body, function(result) {
             res.json(result)
         });
     });
