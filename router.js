@@ -27,10 +27,12 @@ function addtestRoutine(app) {
 
 function addKakaoResponse(app) {
     app.get('/keyboard', function(req, res) {
+        console.log("/keyboard:" + req);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({ "type": "text" }));
     });
     app.post('/message', function(req, res) {
+        console.log("/message:" + req);
         res.setHeader('Content-Type', 'application/json');
         res.send(
             JSON.stringify(MessageProvider.getResponse("kakao", req.body))

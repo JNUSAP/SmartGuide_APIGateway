@@ -2,6 +2,9 @@ const connector = require('./DBConnector.js');
 const Building = require('./building.js');
 const util = require('util');
 var Mock = new Building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
+exports.getInfoByNickName = function(bdgName) {
+    return getInfo(bdgName);
+}
 
 exports.getInfo = function(bdgName, callback) {
     if (Number.isInteger(bdgName)) // bdgId check

@@ -5,6 +5,7 @@ function KakaoResponse(id, name, imgPath) {
     this.keyboard = {
         "type": "text"
     };
+    console.log("KakaoResponse" + this);
 }
 
 
