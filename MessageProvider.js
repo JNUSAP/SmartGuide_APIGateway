@@ -1,8 +1,11 @@
 var BdgSearchModule = require("./BdgSearchModule.js");
-exports.getResponse = function(messageType, req) {
-    console.log("getResponse Called with : " + req);
-    if (messageType == "kakao")
-        return BdgSearchModule.getKakaoResponse(req);
+exports.getResponse = function(messageType, req, callback) {
+    if (messageType == "kakao") {
+        BdgSearchModule.getKakaoResponse(req, function(result) {
+            callback(result);
+        });
+    }
+
     if (messageType == "sms")
         return BdgSearchModule.getSimpleResponse(req);
 };

@@ -3,11 +3,15 @@ var ImgProvider = require("./ImgProvider.js");
 var DBBdgModule = require("./DBBdgModule.js");
 var KakaoResponse = require("./kakaotalkresponse.js");
 var Building = require("./building.js");
-exports.getKakaoResponse = function(req) {
+exports.getKakaoResponse = function(req, callback) {
     if (req.type != "text") return new KakaoResponse(-1); // 사진->null
-    var BdgInfo = DBBdgModule.getInfoByNickName(req.content);
-
-    return new KakaoResponse(BdgInfo.BuildingId, BdgInfo.BuildingName, BdgInfo);
+    DBBdgModule.getInfoByNickName(req.content).then(function(BdgInfo) {
+        console.log("Response: ");
+        console.log(BdgInfo);
+        var message = new KakaoResponse(BdgInfo.buildingId, BdgInfo.buildingName, BdgInfo.buildingImage);
+        console.log(message);
+        return callback(message);
+    });
 }
 exports.getSimpleResponse = function(req) {
     var BdgId = DBBdgModule.getIdByNickName(req.content);

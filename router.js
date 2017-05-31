@@ -20,8 +20,9 @@ exports.init = function(app) {
 function addtestRoutine(app) {
     app.get('/db/:id', function(req, res) {
         var id = req.params.id;
-        res.send(JSON.stringify(DBBdgModule.getInfo(id)));
-
+        MessageProvider.getResponse("kakao", { "type": "text", "content": id }, function(result) {
+            res.json(result)
+        });
     });
 }
 

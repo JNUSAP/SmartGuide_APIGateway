@@ -5,13 +5,11 @@ function KakaoResponse(id, name, imgPath) {
     this.keyboard = {
         "type": "text"
     };
-    console.log("KakaoResponse" + this);
 }
 
 
 function NullKakaoResponse() {
-    console.log(arguments.callee.callr.toString() +
-        "에서 잘못된 message로 카카오 응답을 생성 시도했습니다.");
+    console.log("잘못된 message로 카카오 응답을 생성 시도했습니다.");
     this.message = {
         "text": "요청 처리 중 오류가 발생했습니다."
     }
@@ -28,11 +26,11 @@ function KakaoMessage(id, name, imgPath) {
 
 function MessageButton(id) {
     this.label = "상세 정보";
-    this.url = "/bdg/id";
+    this.url = "/bdg/" + id;
 }
 
 function Photo(imgPath) {
-    this.url = imgPath;
+    this.url = "/img/" + imgPath;
     this.width = 640;
     this.height = 480;
 }

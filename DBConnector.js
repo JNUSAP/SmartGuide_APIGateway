@@ -10,16 +10,17 @@ connection.connect();
 
 
 exports.query = function(query) {
-    new Promise(function(resolve, reject) {
+    return new Promise(function(resolve, reject) {
         connection.query(query, function(err, result) {
             if (err) {
+                console.log(query);
                 console.log("err occurred :" + err.message)
-
                 reject(err);
-            } else
+            } else {
+                console.log(query);
+                console.log(result[0]);
                 resolve(result[0]);
+            }
         });
-    }).then(function(result) {
-        return result;
     });
 };
