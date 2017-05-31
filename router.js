@@ -44,9 +44,11 @@ function addKakaoResponse(app) {
 
 function addBdgREST(app) {
     app.get('/bdgInfo', function(req, res) {
-        var bdgName = req.query.bdgName;
-        var bdgInfo = DBBdgModule.getInfo(bdgName);
-        res.render('bdg', bdgInfo);
+        var bdgName = req.query.BdgName;
+        DBBdgModule.getInfoByNickName(bdgName).then(function(building) {
+            var id = building.buildingId;
+            res.redirect('/bdg/' + id);
+        });
     });
     app.post('/bdg', function(req, res) {
         var bdgInfo = new Building(null, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
@@ -55,10 +57,18 @@ function addBdgREST(app) {
     });
     app.get('/bdg/:id', function(req, res) {
         var id = req.params.id;
+        if (id == -1) res.redirect('/failed');
         DBBdgModule.getInfoById(id).then(function(building) {
             var bdgInfo = building;
             console.log(bdgInfo);
             res.render('bdg', bdgInfo);
+        });
+    });
+    app.get('/bdg/info/:id', function(req, res) {
+        var id = req.params.id;
+        DBBdgModule.getInfoById(id).then(function(building) {
+            if (building.buildingId == -1) res.status(404).send();
+            else res.json(building);
         });
     });
 

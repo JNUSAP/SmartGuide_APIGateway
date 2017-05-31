@@ -11,6 +11,9 @@ exports.getKakaoResponse = function(req, callback) {
         var message = new KakaoResponse(BdgInfo.buildingId, BdgInfo.buildingName, BdgInfo.buildingImage);
         console.log(message);
         return callback(message);
+    }).catch(function() {
+        console.log("getKakaoResponse promise return error");
+        return new KakaoResponse(-1);
     });
 }
 exports.getSimpleResponse = function(req) {

@@ -11,36 +11,46 @@ exports.getInfo = function(bdgName) {
 
     return connector.query(query).then(function(result) {
         return new Promise(function(resolve, reject) {
-            if (typeof(result.buildingId) !== 'number') {
-                console.log("쿼리 실패 :" + result);
-                reject(Building(-1));
+            if (result == undefined) {
+                console.log("getInfo : reject sent");
+                reject(new Building(-1));
             }
+
             var building = new Building(result.buildingId, result.buildingName, result.buildingImage, result.buildingLongitude, result.buildingLatitude, result.buildingMsg1);
             console.log("building:");
             console.log(building);
             resolve(building);
         });
+    }).catch(function() {
+        console.log("getInfo promised return error");
+        return new Building(-1);
     });
 };
 exports.getInfoById = function(bdgId) {
     var query = util.format('SELECT * FROM buildingInfo WHERE buildingId = %d;', bdgId);
     return connector.query(query).then(function(result) {
         return new Promise(function(resolve, reject) {
-            if (typeof(result.buildingId) !== 'number') {
-                console.log("쿼리 실패 :" + result);
-                reject(Building(-1));
-            }
+            if (result == undefined) reject(new Building(-1));
+
             var building = new Building(result.buildingId, result.buildingName, result.buildingImage, result.buildingLongitude, result.buildingLatitude, result.buildingMsg1);
             console.log(building);
             resolve(building);
         });
+    }).catch(function() {
+        console.log("getInfoById promised return error");
+        return new Building(-1);
     });
 }
 exports.getId = function(bdgName) {
     var query = util.format('SELECT buildingId FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
-    var result = connector.query(query);
-    if (typeof(result) === Number) return result;
-    else return -1;
+
+    return connector.query(query).then(function(result) {
+        return new Promise(function(resolve, reject) {
+            if (result == undefined) reject(-1);
+            console.log(getId + " = " + result);
+            resolve(result);
+        });
+    });
 };
 exports.getOriginName = function(id) {
     var query = util.format('SELECT buildingName FROM buildingInfo WHERE buildingId = \'%d\';', id);

@@ -14,13 +14,16 @@ exports.query = function(query) {
         connection.query(query, function(err, result) {
             if (err) {
                 console.log(query);
-                console.log("err occurred :" + err.message)
+                console.log("err occurred :" + err.message);
                 reject(err);
             } else {
                 console.log(query);
+                console.log("result :");
                 console.log(result[0]);
                 resolve(result[0]);
             }
         });
+    }).catch(function() {
+        console.log("DBConnecor Promise returned Error");
     });
 };
