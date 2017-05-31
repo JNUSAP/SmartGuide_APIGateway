@@ -29,12 +29,12 @@ function addtestRoutine(app) {
 function addKakaoResponse(app) {
     app.get('/keyboard', function(req, res) {
         console.log("/keyboard:");
-	console.log(req.body);
+        console.log(req.body);
         res.json({ "type": "text" });
     });
     app.post('/message', function(req, res) {
         console.log("/message:");
-	console.log(req.body);
+        console.log(req.body);
         res.setHeader('Content-Type', 'application/json');
         MessageProvider.getResponse("kakao", req.body, function(result) {
             res.json(result)
@@ -55,7 +55,7 @@ function addBdgREST(app) {
     });
     app.get('/bdg/:id', function(req, res) {
         var id = req.params.id;
-        DBBdgModule.getInfo(id, function(building) {
+        DBBdgModule.getInfoById(id).then(function(building) {
             var bdgInfo = building;
             console.log(bdgInfo);
             res.render('bdg', bdgInfo);

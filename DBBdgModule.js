@@ -7,11 +7,23 @@ exports.getInfoByNickName = function(bdgName) {
 }
 
 exports.getInfo = function(bdgName) {
-    if (typeof(bdgName) !== 'number') // bdgId check
-        var query = util.format('SELECT * FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
-    else
-        var query = util.format('SELECT * FROM buildingInfo WHERE buildingId = %d;', bdgName);
+    var query = util.format('SELECT * FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
 
+    return connector.query(query).then(function(result) {
+        return new Promise(function(resolve, reject) {
+            if (typeof(result.buildingId) !== 'number') {
+                console.log("쿼리 실패 :" + result);
+                reject(Building(-1));
+            }
+            var building = new Building(result.buildingId, result.buildingName, result.buildingImage, result.buildingLongitude, result.buildingLatitude, result.buildingMsg1);
+            console.log("building:");
+            console.log(building);
+            resolve(building);
+        });
+    });
+};
+exports.getInfoById = function(bdgId) {
+    var query = util.format('SELECT * FROM buildingInfo WHERE buildingId = %d;', bdgId);
     return connector.query(query).then(function(result) {
         return new Promise(function(resolve, reject) {
             if (typeof(result.buildingId) !== 'number') {
@@ -23,7 +35,7 @@ exports.getInfo = function(bdgName) {
             resolve(building);
         });
     });
-};
+}
 exports.getId = function(bdgName) {
     var query = util.format('SELECT buildingId FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
     var result = connector.query(query);
