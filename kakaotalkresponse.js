@@ -1,3 +1,5 @@
+const config = require('./config.json');
+
 function KakaoResponse(id, name, imgPath) {
     if (id == -1)
         return NullKakaoResponse();
@@ -26,11 +28,11 @@ function KakaoMessage(id, name, imgPath) {
 
 function MessageButton(id) {
     this.label = "상세 정보";
-    this.url = "/bdg/" + id;
+    this.url = config.host + "/bdg/" + id;
 }
 
 function Photo(imgPath) {
-    this.url = "/img/" + imgPath;
+    this.url = config.host + "/img/" + imgPath;
     this.width = 640;
     this.height = 480;
 }

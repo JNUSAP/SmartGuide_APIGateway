@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
 
-var router = require('./router.js');
-
 app.use(express.static(__dirname + '/img')); // Route.addFiles()의 일부
 router.init(app); // 라우터 켜기, http 입력받을 준비 완료
 
