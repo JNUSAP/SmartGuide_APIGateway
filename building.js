@@ -2,7 +2,7 @@ const config = require('./config.json');
 
 function Building(id, name, path, longitude, latitude, msg1) {
     if (id === undefined) return new FailedBuilding();
-    if (id < 0) return new Path(id, name, longitude, latitude);
+    if (id < -1) return new Path(id, name, longitude, latitude);
     this.buildingId = id;
     this.buildingName = name;
     this.buildingImage = config.host + "/img/" + path;

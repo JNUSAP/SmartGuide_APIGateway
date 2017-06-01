@@ -2,7 +2,7 @@ const config = require('./config.json');
 
 function KakaoResponse(id, name, imgPath) {
     if (id == -1)
-        return NullKakaoResponse();
+        return new NullKakaoResponse();
     this.message = new KakaoMessage(id, name, imgPath);
     this.keyboard = {
         "type": "text"
