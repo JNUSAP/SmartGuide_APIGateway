@@ -1,8 +1,12 @@
 const astar = require("./astar.js");
 
 function makeGraph(startBdgInfo, endBdgInfo) {
-    //시작 건물들, 끝 건물들의 인근 건물 정보들을 불러와서 그래프를 만든다.
-
+    //시작 건물들, 끝 건물들의 인근 건물 정보들을 불러와서 가중치 인접 행렬을 만든다.
+    return new Graph([
+        [],
+        [],
+        []
+    ]);
 }
 
 exports.wayFind = function(startBdgInfo, endBdgInfo) {
