@@ -39,7 +39,7 @@ function Photo(imgPath) {
 
 function FailedKakaoMessage() {
     this.text = "검색에 실패했습니다.";
-    this.photo = config.host + "failed";
+    this.photo = new Photo(config.host + "/img/failed");
     this.message_button = new FailedMessageButton();
 }
 
