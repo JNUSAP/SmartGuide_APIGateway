@@ -12,9 +12,7 @@ function KakaoResponse(id, name, imgPath) {
 
 function NullKakaoResponse() {
     console.log("잘못된 message로 카카오 응답을 생성 시도했습니다.");
-    this.message = {
-        "text": "요청 처리 중 오류가 발생했습니다."
-    }
+    this.message = new FailedKakaoMessage();
     this.keyboard = {
         "type": "text"
     };
@@ -31,10 +29,23 @@ function MessageButton(id) {
     this.url = config.host + "/bdg/" + id;
 }
 
+
+
 function Photo(imgPath) {
     this.url = imgPath;
     this.width = 640;
     this.height = 480;
+}
+
+function FailedKakaoMessage() {
+    this.text = "검색에 실패했습니다.";
+    this.photo = config.host + "failed";
+    this.message_button = new FailedMessageButton();
+}
+
+function FailedMessageButton() {
+    this.label = "제안하기";
+    this.url = config.host + "/failed";
 }
 /*
 {
