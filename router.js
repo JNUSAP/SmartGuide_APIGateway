@@ -122,7 +122,7 @@ function addViews(app) {
         res.render('searchPage');
     });
     app.get('/admin/bdgInfo', function(req, res) {
-        res.render('searchPage');
+        res.render('bdgInfoPage');
     });
 }
 

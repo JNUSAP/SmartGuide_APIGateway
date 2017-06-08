@@ -1,5 +1,4 @@
 //var RequestCache = require("./RequesCache.js");
-var ImgProvider = require("./ImgProvider.js");
 var DBBdgModule = require("./DBBdgModule.js");
 var KakaoResponse = require("./kakaotalkresponse.js");
 var Building = require("./building.js");
