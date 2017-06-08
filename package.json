@@ -4,7 +4,7 @@
   "description": "smartguide backend server",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "test": "jasmine-node --verbose --autotest spec"
   },
   "repository": {
     "type": "git",

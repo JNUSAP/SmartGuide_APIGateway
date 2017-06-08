@@ -5,6 +5,15 @@ const url = require('url');
 const DBBdgModule = require("./DBBdgModule.js");
 const multer = require('multer');
 const Building = require('./building.js');
+/*
+ * 라우터 모듈
+ * 
+ * 서버로 들어오는 HTTP 요청들을 활성화하는 루틴이 있다.
+ * 특이사항:
+ *    testRoutine : 건물 ID로 카카오 요청을 시뮬레이트한다.
+ * 
+ * TODO : Bdg REST를 담당하는 루틴을 모듈로 분리 
+ */
 exports.init = function(app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -94,9 +103,9 @@ function addSuggestREST(app) {
 function addViews(app) {
     app.set('view engine', 'pug');
     app.get('/', function(req, res) {
-        res.render('searchPage');
+        res.render('index');
     });
-    app.get('/bdgAdd', function(req, res) {
+    app.get('/admin/bdgAdd', function(req, res) {
         res.render('bdgAddPage');
     });
     app.get('/admin', function(req, res) {
@@ -105,11 +114,14 @@ function addViews(app) {
     app.get('/failed', function(req, res) {
         res.render('failedPage');
     });
-    app.get('/suggest', function(req, res) {
+    app.get('/admin/suggest', function(req, res) {
         res.render('suggestPage');
     });
 
     app.get('/search', function(req, res) {
+        res.render('searchPage');
+    });
+    app.get('/admin/bdgInfo', function(req, res) {
         res.render('searchPage');
     });
 }
