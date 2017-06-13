@@ -2,7 +2,9 @@
 var DBBdgModule = require("./DBBdgModule.js");
 var KakaoResponse = require("./kakaotalkresponse.js");
 var Building = require("./building.js");
+const config = require("./config.json");
 exports.getKakaoResponse = function(req, callback) {
+    /*카카오톡 요청 */
     if (req.type != "text") return new KakaoResponse(-1); // 사진->null
     DBBdgModule.getInfoByNickName(req.content).then(function(BdgInfo) {
         console.log("Response: ");
@@ -16,10 +18,11 @@ exports.getKakaoResponse = function(req, callback) {
     });
 }
 exports.getSimpleResponse = function(req) {
+    /*SMS 요청 */
     var BdgId = DBBdgModule.getIdByNickName(req.content);
     return {
         "message": {
-            "text": BdgId
+            "text": config.host +"/bdg/"+ BdgId
         }
     };
 };
