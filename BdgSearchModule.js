@@ -19,10 +19,20 @@ exports.getKakaoResponse = function(req, callback) {
 }
 exports.getSimpleResponse = function(req) {
     /*SMS 요청 */
-    var BdgId = DBBdgModule.getIdByNickName(req.content);
-    return {
-        "message": {
-            "text": config.host +"/bdg/"+ BdgId
-        }
-    };
+    DBBdgModule.getIdByNickName(req.content).then(function(BdgId){
+        console.log("SMS Response:");
+        console.log(BdgId);
+        return {
+            "message": {
+                "text": config.host +"/bdg/"+ BdgId
+            }
+        };
+    }).catch(function(){
+        console.log("getSimpleResponse promise returned error");
+        return {
+            "message": {
+                "text": "검색에 실패했습니다. 제안하기:http://" + config.host + "/suggest"
+            }
+        };
+    });
 };
