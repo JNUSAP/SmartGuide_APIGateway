@@ -84,20 +84,18 @@ function addBdgREST(app) {
 }
 
 function addSuggestREST(app) {
-    app.get('/suggestBdg',
-        function(req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(
-                JSON.stringify(MessageProvider.getResponse("kakao")) // 임시 메시지. MessageProvider.js로
-            );
+    app.get('/suggestBdg/:id', function(req, res) {
+        var id = req.params.id;
+        DBSuggestModule.getSuggest(id).then(function(suggest) {
+            if (suggest.suggestId == -1) res.status(404).send();
+            else res.json(suggest);
         });
-    app.post('/suggestBdg',
-        function(req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(
-
-            );
-        });
+    });
+    app.post('/suggestBdg', function(req, res) {
+            var suggest = new BdgSuggest();
+            DBSuggestModule.addSuggest(suggest);
+            res.status(204).send();
+    });
 }
 
 function addViews(app) {
