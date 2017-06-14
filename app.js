@@ -29,7 +29,7 @@ router.init(app);
 http.createServer(app).listen(httpPort, function() {
     console.log("HTTP Init");
 });
-/*
-https.createServer(options,app).listen(httpsPort,function(){
-	console.log("서버 동작 중");
-});*/
+
+https.createServer(options, app).listen(httpsPort, function() {
+    console.log("서버 동작 중");
+});
