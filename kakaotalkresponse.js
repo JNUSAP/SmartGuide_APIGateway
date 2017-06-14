@@ -32,7 +32,7 @@ function MessageButton(id) {
 
 
 function Photo(imgPath) {
-    this.url = imgPath;
+    this.url = "http://" + imgPath + ".jpg";
     this.width = 640;
     this.height = 480;
 }
