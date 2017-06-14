@@ -26,6 +26,7 @@ exports.init = function(app) {
     addViews(app);
     addBdgREST(app);
     addSuggestREST(app);
+    addFiles(app);
 };
 
 function addtestRoutine(app) { /*카카오 요청을 모방하는 요청 */
@@ -141,5 +142,18 @@ function addViews(app) {
     });
     app.get('/admin/bdgInfo', function(req, res) {
         res.render('bdgInfoPage');
+    });
+}
+
+function addFiles(app) {
+    /*서버 내 파일 요청 */
+
+    //Whitelist 방식
+    //브라우저 Javascripts
+    app.get('a', function(req, res) {
+        res.sendFile(path.join(__dirname + '/a'));
+    });
+    app.get('b', function(req, res) {
+        res.sendFile(path.join(__dirname + '/b'));
     });
 }
