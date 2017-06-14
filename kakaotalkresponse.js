@@ -32,14 +32,14 @@ function MessageButton(id) {
 
 
 function Photo(imgPath) {
-    this.url = "http://" + imgPath + ".jpg";
+    this.url = imgPath;
     this.width = 640;
     this.height = 480;
 }
 
 function FailedKakaoMessage() {
     this.text = "검색에 실패했습니다.";
-    this.photo = new Photo(config.host + "/img/failed");
+    this.photo = new Photo(config.imgBase + "/img/failed");
     this.message_button = new FailedMessageButton();
 }
 
