@@ -19,9 +19,12 @@ function AppendSuggestInfo(id, suggestBoard) {
     var suggestInfo = document.createElement("div");
     suggestInfo.className = "suggestInfo";
     getSuggest(id, function(bdgSuggest) {
-        createElement = function(typeName, className, obj) {
+        createElement = function(typeName, className, obj, event) {
             var element = document.createElement(typeName);
             element.className = className;
+            if (event != undefined)
+                element.onclick = event;
+            console.log(element);
             obj.append(element);
             return element;
         }
@@ -32,16 +35,13 @@ function AppendSuggestInfo(id, suggestBoard) {
         content.innerHTML = bdgSuggest.suggestContent;
         content.disabled = true;
         createElement("br", "", suggestInfo);
-        var addButton = createElement("button", "acceptButton", suggestInfo)
+        var addButton = createElement("button", "acceptButton",
+                suggestInfo,
+                function() { console.log("event") })
             .innerHTML = "추가";
-        addButtion.addEventListener("click", function() {
-            location.href = "/bdgAdd"
-        });
-        var deleteButtion = createElement("button", "deleteButton", suggestInfo)
+        var deleteButton = createElement("button", "deleteButton",
+                suggestInfo, "location.href = '/bdgAdd'")
             .innerHTML = "삭제";
-        deleteButtion.addEventListener("click", function() {
-
-        });
         return suggestBoard.append(suggestInfo);
     });
 }

@@ -1,12 +1,15 @@
 extends ./userlayout.pug
 block title
     title #{buildingName}
+    style
+        include css/page.css
 block content
-    div(id=bdgTitle) #{buildingName}
-    div(id=bdgImg)
-        img(src=buildingImage)
-    div(id="map" style="width:500px;height:400px;")
-    div(id="nearBdgList")
+    div(class="bdgTitle")
+        h1 #{buildingName}
+    div(class="bdgImg")
+        img(class="innerImg" src=buildingImage)
+    div(class="mapdiv" id="map" style="width:500px;height:400px;")
+    div(class="nearBdgList")
     p(id="latitude" hidden="true") #{buildingLatitude}
     p(id="longitude" hidden="true") #{buildingLongitude}
     script(src="//apis.daum.net/maps/maps3.js?apikey=5042f12f3f6b34915502a37a3194d5d2")
@@ -21,12 +24,15 @@ block content
         var map = new daum.maps.Map(container, options);
         var marker = new daum.maps.Marker({
             map: map,
-            draggable:true,
+            draggable:false,
             position: new daum.maps.LatLng(35.17975388800317
                 , 126.90864887702128)
         });
 
         function init(){
+            /*건물 정보 검사*/
+            if(latitude.innerHTML == "") location.href = '/failed'
+            /*건물 정보 로드 완료 대기후 실행*/
             setTimeout(function(){
             var lat = parseFloat(document.getElementById('latitude').innerHTML);
             var long = parseFloat(document.getElementById('longitude').innerHTML);
@@ -64,4 +70,4 @@ block content
             return refreshMap(data.latitude.value
                     ,data.longitude.value);
         }
-
+        
