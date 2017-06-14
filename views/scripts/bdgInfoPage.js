@@ -19,7 +19,10 @@ function AppendBdgInfo(id, bdgInfoBoard) {
     var bdginfo = document.createElement("div");
     bdginfo.className = "bdgInfo";
     getBdgInfo(id, function(bdgDB) {
+        /*REST로 건물 정보를 얻은 뒤 호출되는 함수*/
+
         createElement = function(typeName, className, obj) {
+            /* HTML 요소를 만든다. */
             var element = document.createElement(typeName);
             element.className = className;
             obj.append(element);
@@ -29,7 +32,7 @@ function AppendBdgInfo(id, bdgInfoBoard) {
         createElement("p", "bdgTitle", bdginfo)
             .innerHTML = bdgDB.buildingName;
         var content = createElement("textarea", "bdgContent", bdginfo)
-        content.innerHTML = bdgDB.buildingMsg1;
+        content.innerHTML = "GPS:" + bdgDB.buildingLongitude + "," + bdgDB.buildingLatitude;
         content.disabled = true;
         createElement("br", "", bdginfo);
         createElement("button", "acceptButton", bdginfo)

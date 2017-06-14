@@ -7,28 +7,41 @@ block content
         img(src=buildingImage)
     div(id="map" style="width:500px;height:400px;")
     div(id="nearBdgList")
-    p(id="latitude" hidden="true") #{buildingLongitude}
-    p(id="longitude" hidden="true") #{buildingLatitude}
+    p(id="latitude" hidden="true") #{buildingLatitude}
+    p(id="longitude" hidden="true") #{buildingLongitude}
     script(src="//apis.daum.net/maps/maps3.js?apikey=5042f12f3f6b34915502a37a3194d5d2")
     script.
         window.onload = init();
-        var lat = parseFloat(document.getElementById('latitude').innerHTML);
-        var long = parseFloat(document.getElementById('longitude').innerHTML);
-        var data;
-        
-        console.log(lat);
-        console.log(long);
-        console.log(typeof(lat));
-        console.log(typeof(long));
         var container = document.getElementById('map');
         var options = {
-            center : new daum.maps.LatLng(lat, long),
+            center : new daum.maps.LatLng(35.17975388800317
+                , 126.90864887702128),
             level : 3
         };
         var map = new daum.maps.Map(container, options);
-        
+        var marker = new daum.maps.Marker({
+            map: map,
+            draggable:true,
+            position: new daum.maps.LatLng(35.17975388800317
+                , 126.90864887702128)
+        });
+
         function init(){
-            mapInit();
+            setTimeout(function(){
+            var lat = parseFloat(document.getElementById('latitude').innerHTML);
+            var long = parseFloat(document.getElementById('longitude').innerHTML);
+            var bdgPosition = new daum.maps.LatLng(lat,long);
+            console.log(typeof(lat));
+            console.log(map.getCenter());
+            console.log(bdgPosition);
+            console.log(bdgPosition.getLat());
+            console.log(bdgPosition.getLng());
+            map.setCenter(bdgPosition);
+            marker.setPosition(bdgPosition);
+            map.relayout();
+            console.log(map.getCenter());
+            //mapInit();
+            },200);
         }
         
         function getPosition(position) {
@@ -38,13 +51,14 @@ block content
             });
         }
         function mapInit() {
-            return refreshMap(lat,long);
-            });
+            return refreshMap();
         }
-        function refreshMap(lat,long){
+        function refreshMap(){
+            console.log(lat);
+            console.log(long);
             var position = new daum.maps.LatLng(lat,long);
+            console.log(position);
             map.setCenter(position);
-            marker.setPosition(position);
         }
         function mapChanged(){
             return refreshMap(data.latitude.value

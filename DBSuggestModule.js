@@ -9,17 +9,17 @@ exports.getSuggest = function(id) {
         return new Promise(function(resolve, reject) {
             if (result == undefined) {
                 console.log("getSuggest : reject sent");
-                reject(new Building(-1));
+                reject(new BdgSuggest(-1));
             }
             if (result.suggestionIsDelete == 1) return BdgSuggest(undefined);
             var suggest = new BdgSuggest(result.suggestionId, result.suggestionTitle, result.suggestionText);
             console.log("suggest:");
-            console.log(building);
-            resolve(building);
+            console.log(suggest);
+            resolve(suggest);
         });
     }).catch(function() {
         console.log("getInfo promised return error");
-        return new Building(-1);
+        return new BdgSuggest(-1);
     });
 };
 exports.addSuggest = function(suggest) {

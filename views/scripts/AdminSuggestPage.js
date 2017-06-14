@@ -51,7 +51,7 @@ function filler(id) {
 //BdgInfo.js
 function getSuggest(id, func) {
     var req = new XMLHttpRequest();
-    req.open('GET', '/suggestBdg' + id);
+    req.open('GET', '/suggestBdg/' + id);
     req.send(null);
     req.onreadystatechange = function(aEvt) {
         if (req.readyState == 4 && req.status == 200) {
