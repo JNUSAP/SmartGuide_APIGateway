@@ -19,15 +19,15 @@ exports.getKakaoResponse = function(req, callback) {
 }
 exports.getSimpleResponse = function(req) {
     /*SMS 요청 */
-    DBBdgModule.getIdByNickName(req.content).then(function(BdgId){
+    DBBdgModule.getIdByNickName(req.content).then(function(BdgId) {
         console.log("SMS Response:");
         console.log(BdgId);
         return {
             "message": {
-                "text": config.host +"/bdg/"+ BdgId
+                "text": config.host + "/bdg/" + BdgId
             }
         };
-    }).catch(function(){
+    }).catch(function() {
         console.log("getSimpleResponse promise returned error");
         return {
             "message": {
