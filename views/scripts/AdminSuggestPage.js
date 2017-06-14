@@ -15,10 +15,10 @@ function isBottom() {
     return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
 }
 
-function AppendBdgInfo(id, suggestBoard) {
+function AppendSuggestInfo(id, suggestBoard) {
     var bdginfo = document.createElement("div");
     bdginfo.className = "suggestInfo";
-    getBdgInfo(id, function(bdgSuggest) {
+    getSuggest(id, function(bdgSuggest) {
         createElement = function(typeName, className, obj) {
             var element = document.createElement(typeName);
             element.className = className;
@@ -43,26 +43,25 @@ function AppendBdgInfo(id, suggestBoard) {
 function filler(id) {
     return function(count) {
         for (count; count > 0; count--) {
-            AppendBdgInfo(id, suggestBoard);
+            AppendSuggestInfo(id, suggestBoard);
             id++;
         }
     }
 }
 //BdgInfo.js
-function getBdgInfo(id, func) {
+function getSuggest(id, func) {
     var req = new XMLHttpRequest();
-    req.open('GET', '/bdg/info/' + id, true);
-    req.onload = function(e) {
+    req.open('GET', '/suggestBdg' + id);
+    req.send(null);
+    req.onreadystatechange = function(aEvt) {
         if (req.readyState == 4 && req.status == 200) {
             console.log("success.");
             console.log(req.responseText);
             info = JSON.parse(req.responseText);
             return func(info);
+        } else {
+            console.log("suggest request err.");
+            return -1;
         }
     };
-    req.onerror = function(e) {
-        console.log("bdg request err.");
-        return -1;
-    }
-    req.send(null);
 }
