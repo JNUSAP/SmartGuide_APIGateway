@@ -3,6 +3,12 @@ const app = express();
 const router = require('./router.js');
 const fs = require('fs');
 const fileName = './config.json';
+const https = require('https');
+const options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+};
+
 var file = require(fileName);
 
 /*일부 폴더 정적 공유*/
@@ -16,6 +22,6 @@ require('dns').lookup(require('os').hostname(), function(err, add, fam) {
 
 router.init(app);
 
-app.listen(80, function() {
+https.createServer(options, app).listen(443, function() {
     console.log('서버 동작 중');
 });
