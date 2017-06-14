@@ -3,7 +3,7 @@ const BdgSuggest = require('./bdgSuggest.js');
 const util = require('util');
 
 exports.getSuggest = function(id) {
-    var query = util.format('SELECT * FROM suggestion WHERE suggestId = %d;', id);
+    var query = util.format('SELECT * FROM suggestion WHERE idsuggestion= %d;', id);
 
     return connector.query(query).then(function(result) {
         return new Promise(function(resolve, reject) {
@@ -12,7 +12,7 @@ exports.getSuggest = function(id) {
                 reject(new BdgSuggest(-1));
             }
             if (result.suggestionIsDelete == 1) return BdgSuggest(undefined);
-            var suggest = new BdgSuggest(result.suggestionId, result.suggestionTitle, result.suggestionText);
+            var suggest = new BdgSuggest(result.idsuggestion, result.suggestionTitle, result.suggestionText);
             console.log("suggest:");
             console.log(suggest);
             resolve(suggest);
@@ -33,6 +33,6 @@ exports.addSuggest = function(suggest) {
     connector.query(query);
 };
 exports.deleteSuggest = function(id) {
-    var query = util.format("UPDATE suggestion SET suggestionIsDelete = TRUE, WHERE suggestionId = %d;", id);
+    var query = util.format("UPDATE suggestion SET suggestionIsDelete = TRUE, WHERE idsuggestion = %d;", id);
     connector.query(query);
 };

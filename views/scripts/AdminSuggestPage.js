@@ -16,8 +16,8 @@ function isBottom() {
 }
 
 function AppendSuggestInfo(id, suggestBoard) {
-    var bdginfo = document.createElement("div");
-    bdginfo.className = "suggestInfo";
+    var suggestInfo = document.createElement("div");
+    suggestInfo.className = "suggestInfo";
     getSuggest(id, function(bdgSuggest) {
         createElement = function(typeName, className, obj) {
             var element = document.createElement(typeName);
@@ -26,17 +26,23 @@ function AppendSuggestInfo(id, suggestBoard) {
             return element;
         }
 
-        createElement("p", "suggestTitle", bdginfo)
-            .innerHTML = bdgSuggest.buildingName;
-        var content = createElement("textarea", "suggestContent", bdginfo)
-        content.innerHTML = bdgSuggest.buildingMsg1;
+        createElement("p", "suggestTitle", suggestInfo)
+            .innerHTML = bdgSuggest.suggestTitle;
+        var content = createElement("textarea", "suggestContent", suggestInfo)
+        content.innerHTML = bdgSuggest.suggestContent;
         content.disabled = true;
-        createElement("br", "", bdginfo);
-        createElement("button", "acceptButton", bdginfo)
+        createElement("br", "", suggestInfo);
+        var addButton = createElement("button", "acceptButton", suggestInfo)
             .innerHTML = "추가";
-        createElement("button", "deleteButton", bdginfo)
+        addButtion.addEventListener("click", function() {
+            location.href = "/bdgAdd"
+        });
+        var deleteButtion = createElement("button", "deleteButton", suggestInfo)
             .innerHTML = "삭제";
-        return suggestBoard.append(bdginfo);
+        deleteButtion.addEventListener("click", function() {
+
+        });
+        return suggestBoard.append(suggestInfo);
     });
 }
 
@@ -48,7 +54,7 @@ function filler(id) {
         }
     }
 }
-//BdgInfo.js
+//suggestInfo.js
 function getSuggest(id, func) {
     var req = new XMLHttpRequest();
     req.open('GET', '/suggestBdg/' + id);
@@ -64,4 +70,26 @@ function getSuggest(id, func) {
             return -1;
         }
     };
+}
+
+function deleteSuggest(id, func) {
+    var req = new XMLHttpRequest();
+    req.open('DELETE', '/suggestBdg/' + id);
+    req.send(null);
+    req.onreadystatechange = function(aEvt) {
+        if (req.readyState == 4 && req.status == 200) {
+            console.log("success.");
+            console.log(req.responseText);
+            info = JSON.parse(req.responseText);
+            return func(info);
+        } else {
+            console.log("suggest request err.");
+            return -1;
+        }
+    };
+}
+
+function acceptSuggest(id, func) {
+    var req = new XMLHttpRequest();
+    req.open('POST', '/acceptSuggest/' + id);
 }
