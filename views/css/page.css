@@ -21,4 +21,8 @@
 .innerImg {
     width: auto;
     height: auto;
+    min-width: 35%;
+    min-height: 35%;
+    max-width: 70%;
+    max-height: 70%;
 }
