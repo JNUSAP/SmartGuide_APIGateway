@@ -7,7 +7,6 @@ const DBSuggestModule = require("./DBSuggestModule.js");
 const multer = require('multer');
 const Building = require('./building.js');
 const BdgSuggest = require('./bdgSuggest.js');
-const HTTPCode = require('./HTTPCode.js');
 /*
  * 라우터 모듈
  * 
@@ -80,14 +79,14 @@ function addBdgREST(app) {
         /*null과 undefined가 다른 것에 주의 */
         var bdgInfo = new Building(null, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
         DBBdgModule.setInfo(bdgInfo);
-        res.status(HTTPCode.noContent).send();
+        res.status(204).send();
     });
 
     /*JSON 형식 건물 정보 */
     app.get('/bdg/info/:id', function(req, res) {
         var id = req.params.id;
         DBBdgModule.getInfoById(id).then(function(building) {
-            if (building.buildingId == -1) res.status(HTTPCode.noContent).send();
+            if (building.buildingId == -1) res.status(404).send();
             else res.json(building);
         });
     });
@@ -110,10 +109,10 @@ function addSuggestREST(app) {
         var suggest = new BdgSuggest(null, req.body.suggestTitle, req.body.suggestContent);
         /* */
         if (suggest == undefined)
-            res.status(HTTPCode.noContent).send();
+            res.status(500).send();
         else {
             DBSuggestModule.addSuggest(suggest);
-            res.status(HTTPCode.success).send();
+            res.status(204).send();
         }
     });
 }
