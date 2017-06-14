@@ -23,6 +23,11 @@ exports.getSuggest = function(id) {
     });
 };
 exports.addSuggest = function(suggest) {
+    if (suggest == undefined || suggest.suggestTitle == undefined || suggest.suggestContent == undefined) {
+        console.log("suggest Failed");
+        return -1;
+    }
+
     var query = util.format('INSERT INTO suggestion(suggestionTitle, suggestionText) VALUES (\'%s\', \'%s\');',
         suggest.suggestTitle, suggest.suggestContent);
     connector.query(query);

@@ -5,6 +5,10 @@ block content
     h1(align="center") 검색에 실패했습니다. 어떤 건물이 있는지 알려주시겠어요?
     
     form(action="/suggestBdg" method="POST")
-        input(type="text")
-        input(type="textarea" rows=100 cols=40)
-        input(type="submit" value="Submit")
+        p 건물 이름 :
+        input(type="text" name="suggestTitle")
+        br
+        p 제안 내용 :
+        input(type="form" name="suggestContent")
+        br
+        input(type="submit" value="제안하기")

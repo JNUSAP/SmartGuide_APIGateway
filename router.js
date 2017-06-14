@@ -3,9 +3,11 @@ const bodyParser = require('body-parser');
 const path = require("path");
 const url = require('url');
 const DBBdgModule = require("./DBBdgModule.js");
+const DBSuggestModule = require("./DBSuggestModule.js");
 const multer = require('multer');
 const Building = require('./building.js');
 const BdgSuggest = require('./bdgSuggest.js');
+const HTTPCode = require('./HTTPCode.js');
 /*
  * 라우터 모듈
  * 
@@ -25,7 +27,6 @@ exports.init = function(app) {
     addViews(app);
     addBdgREST(app);
     addSuggestREST(app);
-    addFiles(app);
 };
 
 function addtestRoutine(app) { /*카카오 요청을 모방하는 요청 */
@@ -79,14 +80,14 @@ function addBdgREST(app) {
         /*null과 undefined가 다른 것에 주의 */
         var bdgInfo = new Building(null, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
         DBBdgModule.setInfo(bdgInfo);
-        res.status(204).send();
+        res.status(HTTPCode.noContent).send();
     });
 
     /*JSON 형식 건물 정보 */
     app.get('/bdg/info/:id', function(req, res) {
         var id = req.params.id;
         DBBdgModule.getInfoById(id).then(function(building) {
-            if (building.buildingId == -1) res.status(404).send();
+            if (building.buildingId == -1) res.status(HTTPCode.noContent).send();
             else res.json(building);
         });
     });
@@ -104,9 +105,16 @@ function addSuggestREST(app) {
     });
     app.post('/suggestBdg', function(req, res) {
         /*null과 undefined가 다른 것에 주의 */
-        var suggest = new BdgSuggest(null, req.body.title, req.body.content);
-        DBSuggestModule.addSuggest(suggest);
-        res.status(204).send();
+        console.log(req.body.suggestTitle);
+        console.log(req.body.suggestContent);
+        var suggest = new BdgSuggest(null, req.body.suggestTitle, req.body.suggestContent);
+        /* */
+        if (suggest == undefined)
+            res.status(HTTPCode.noContent).send();
+        else {
+            DBSuggestModule.addSuggest(suggest);
+            res.status(HTTPCode.success).send();
+        }
     });
 }
 
@@ -135,15 +143,4 @@ function addViews(app) {
     app.get('/admin/bdgInfo', function(req, res) {
         res.render('bdgInfoPage');
     });
-}
-
-function addFiles(app) {
-    /*서버 내 파일 요청 */
-
-    //Whitelist 방식
-    //브라우저 Javascripts
-    app.get('/views/scripts/suggest.js', function(req, res) {
-        res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
-    });
-
 }
