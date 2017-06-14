@@ -15,6 +15,7 @@ const Building = require('./building.js');
  * TODO : Bdg REST를 담당하는 루틴을 모듈로 분리 
  */
 exports.init = function(app) {
+    /*모듈들을 초기화하고 HTTP 요청을 등록함*/
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(multer({ dest: './img' }).single('img'));
@@ -26,7 +27,8 @@ exports.init = function(app) {
     addFiles(app);
 };
 
-function addtestRoutine(app) {
+function addtestRoutine(app) 
+{/*카카오 요청을 모방하는 요청 */
     app.get('/db/:id', function(req, res) {
         var id = req.params.id;
         MessageProvider.getResponse("kakao", { "type": "text", "content": id }, function(result) {
@@ -36,6 +38,7 @@ function addtestRoutine(app) {
 }
 
 function addKakaoResponse(app) {
+    /*카카오 요청/응답 */
     app.get('/keyboard', function(req, res) {
         console.log("/keyboard:");
         console.log(req.body);
@@ -52,6 +55,7 @@ function addKakaoResponse(app) {
 }
 
 function addBdgREST(app) {
+    /*(검색 페이지) 건물 검색 시 리다이렉트 */
     app.get('/bdgInfo', function(req, res) {
         var bdgName = req.query.BdgName;
         DBBdgModule.getInfoByNickName(bdgName).then(function(building) {
@@ -59,11 +63,8 @@ function addBdgREST(app) {
             res.redirect('/bdg/' + id);
         });
     });
-    app.post('/bdg', function(req, res) {
-        var bdgInfo = new Building(null, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
-        DBBdgModule.setInfo(bdgInfo);
-        res.status(204).send();
-    });
+    /*건물 상세 정보 페이지*/
+    
     app.get('/bdg/:id', function(req, res) {
         var id = req.params.id;
         if (id == -1) res.redirect('/failed');
@@ -73,6 +74,14 @@ function addBdgREST(app) {
             res.render('bdg', bdgInfo);
         });
     });
+    
+    app.post('/bdg', function(req, res) {
+        var bdgInfo = new Building(null, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
+        DBBdgModule.setInfo(bdgInfo);
+        res.status(204).send();
+    });
+
+    /*JSON 형식 건물 정보 */
     app.get('/bdg/info/:id', function(req, res) {
         var id = req.params.id;
         DBBdgModule.getInfoById(id).then(function(building) {
@@ -84,23 +93,23 @@ function addBdgREST(app) {
 }
 
 function addSuggestREST(app) {
-    app.get('/suggestBdg',
-        function(req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(
-                JSON.stringify(MessageProvider.getResponse("kakao")) // 임시 메시지. MessageProvider.js로
-            );
+    /*건물 제안 정보 */
+    app.get('/suggestBdg/:id', function(req, res) {
+        var id = req.params.id;
+        DBSuggestModule.getSuggest(id).then(function(suggest) {
+            if (suggest.suggestId == -1) res.status(404).send();
+            else res.json(suggest);
         });
-    app.post('/suggestBdg',
-        function(req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(
-
-            );
-        });
+    });
+    app.post('/suggestBdg', function(req, res) {
+            var suggest = new BdgSuggest();
+            DBSuggestModule.addSuggest(suggest);
+            res.status(204).send();
+    });
 }
 
 function addViews(app) {
+    /*페이지 뷰 */
     app.set('view engine', 'pug');
     app.get('/', function(req, res) {
         res.render('index');
@@ -127,9 +136,10 @@ function addViews(app) {
 }
 
 function addFiles(app) {
+    /*서버 내 파일 요청 */
+
     //Whitelist 방식
     //브라우저 Javascripts
-
     app.get('/views/scripts/suggest.js', function(req, res) {
         res.sendFile(path.join(__dirname + '/views/scripts/suggest.js'));
     });
