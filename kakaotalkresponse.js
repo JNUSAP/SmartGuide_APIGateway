@@ -26,7 +26,7 @@ function KakaoMessage(id, name, imgPath) {
 
 function MessageButton(id) {
     this.label = "상세 정보";
-    this.url = config.imgBase + "/bdg/" + id;
+    this.url = config.host + "/bdg/" + id;
 }
 
 
