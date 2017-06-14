@@ -9,7 +9,45 @@ block content
     div(id="nearBdgList")
     p(id="latitude" hidden="true") #{buildingLongitude}
     p(id="longitude" hidden="true") #{buildingLatitude}
+    script(src="//apis.daum.net/maps/maps3.js?apikey=5042f12f3f6b34915502a37a3194d5d2")
     script.
+        window.onload = init();
+        var lat = parseFloat(document.getElementById('latitude').innerHTML);
+        var long = parseFloat(document.getElementById('longitude').innerHTML);
+        var data;
         
+        console.log(lat);
+        console.log(long);
+        console.log(typeof(lat));
+        console.log(typeof(long));
+        var container = document.getElementById('map');
+        var options = {
+            center : new daum.maps.LatLng(lat, long),
+            level : 3
+        };
+        var map = new daum.maps.Map(container, options);
+        
+        function init(){
+            mapInit();
+        }
+        
+        function getPosition(position) {
+            navigator.geolocation.getCurrentPosition(function(position){
+                data.latitude.value=position.coords.latitude;
+                data.longitude.value=position.coords.longitude;
+            });
+        }
+        function mapInit() {
+            return refreshMap(lat,long);
+            });
+        }
+        function refreshMap(lat,long){
+            var position = new daum.maps.LatLng(lat,long);
+            map.setCenter(position);
+            marker.setPosition(position);
+        }
+        function mapChanged(){
+            return refreshMap(data.latitude.value
+                    ,data.longitude.value);
+        }
 
-    
