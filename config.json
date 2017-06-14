@@ -1,4 +1,4 @@
 {
     "host": "192.168.116.1",
-    "imageBase": "ec2-52-78-17-235.ap-northeast-2.compute.amazonaws.com/img/"
+    "imageBase": "52.78.17.235/img/"
 }
