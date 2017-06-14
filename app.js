@@ -25,11 +25,6 @@ res.redirect('https://'+req.hostname+':'+app.get('port_https')+req.url);
 });
 */
 
-/*ip 설정 최신화*/
-require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-    fs.writeFileSync(fileName, JSON.stringify({ "host": add }));
-});
-
 router.init(app);
 http.createServer(app).listen(httpPort, function() {
     console.log("HTTP Init");
