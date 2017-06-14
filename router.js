@@ -5,6 +5,7 @@ const url = require('url');
 const DBBdgModule = require("./DBBdgModule.js");
 const multer = require('multer');
 const Building = require('./building.js');
+const BdgSuggest = require('./bdgSuggest.js');
 /*
  * 라우터 모듈
  * 
@@ -27,8 +28,7 @@ exports.init = function(app) {
     addFiles(app);
 };
 
-function addtestRoutine(app) 
-{/*카카오 요청을 모방하는 요청 */
+function addtestRoutine(app) { /*카카오 요청을 모방하는 요청 */
     app.get('/db/:id', function(req, res) {
         var id = req.params.id;
         MessageProvider.getResponse("kakao", { "type": "text", "content": id }, function(result) {
@@ -64,7 +64,7 @@ function addBdgREST(app) {
         });
     });
     /*건물 상세 정보 페이지*/
-    
+
     app.get('/bdg/:id', function(req, res) {
         var id = req.params.id;
         if (id == -1) res.redirect('/failed');
@@ -74,8 +74,9 @@ function addBdgREST(app) {
             res.render('bdg', bdgInfo);
         });
     });
-    
+
     app.post('/bdg', function(req, res) {
+        /*null과 undefined가 다른 것에 주의 */
         var bdgInfo = new Building(null, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
         DBBdgModule.setInfo(bdgInfo);
         res.status(204).send();
@@ -102,9 +103,10 @@ function addSuggestREST(app) {
         });
     });
     app.post('/suggestBdg', function(req, res) {
-            var suggest = new BdgSuggest();
-            DBSuggestModule.addSuggest(suggest);
-            res.status(204).send();
+        /*null과 undefined가 다른 것에 주의 */
+        var suggest = new BdgSuggest(null, req.body.title, req.body.content);
+        DBSuggestModule.addSuggest(suggest);
+        res.status(204).send();
     });
 }
 
