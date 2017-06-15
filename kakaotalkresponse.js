@@ -20,7 +20,7 @@ function NullKakaoResponse() {
 
 function KakaoMessage(id, name, imgPath) {
     this.text = name;
-    this.photo = new Photo(imgPath);
+    this.photo = new Photo(config.imgBase + imgPath);
     this.message_button = new MessageButton(id);
 }
 
@@ -39,7 +39,7 @@ function Photo(imgPath) {
 
 function FailedKakaoMessage() {
     this.text = "검색에 실패했습니다.";
-    this.photo = new Photo(config.imgBase + "/img/failed");
+    this.photo = new Photo(config.imgBase + "failed");
     this.message_button = new FailedMessageButton();
 }
 
