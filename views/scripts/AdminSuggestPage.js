@@ -35,7 +35,7 @@ function AppendSuggestInfo(id, suggestBoard) {
         content.innerHTML = bdgSuggest.suggestContent;
         content.disabled = true;
         createElement("br", "", suggestInfo);
-        var buttondiv = createElement("div", "centerdiv", suggest);
+        var buttondiv = createElement("div", "centerdiv", suggestInfo);
         createElement("button", "w3-button w3-green", buttondiv)
             .innerHTML = "추가";
         createElement("button", "w3-button w3-red", buttondiv)
