@@ -53,7 +53,7 @@ function AppendBdgInfo(id, bdgInfoBoard) {
         var closeButton = createElement("span", "close", imgDiv);
         closeButton.onclick = "document.getElementById('myModal" + bdgDB.buildingId + "').style.display='none'";
         closeButton.innerHTML = "&times;"
-        var span = close[0];
+        var span = closeButton[0];
         span.onclick = function() {
             modal.style.display = "none";
         }
