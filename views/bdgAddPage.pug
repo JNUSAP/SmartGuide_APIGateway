@@ -16,6 +16,8 @@ block content
         p 
         input(type="file" name="img" placeholder="이미지")
         input(type="submit" value="등록")
+        p
+        input(type="button" name="현재 위치 반영" onclick="setPosition()")
 
         script(src="//apis.daum.net/maps/maps3.js?apikey=9e7b4f02cc89fa18ab3e9ca9cb7e6898")
         script.
@@ -37,9 +39,19 @@ block content
                 data.latitude.value=position.getLat();
                 data.longitude.value=position.getLng();
             });
-            
+            daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
+                
+                // 클릭한 위도, 경도 정보를 가져옵니다 
+                var latlng = mouseEvent.latLng; 
+                
+                // 마커 위치를 클릭한 위치로 옮깁니다
+                marker.setPosition(latlng);
+                data.latitude.value=latlng.getLat();
+                data.longitude.value=latlng.getLng();
+                mapChanged();
+                
+            });
             function init(){
-                setPosition();
             }
             function setPosition(position) {
                  navigator.geolocation.getCurrentPosition(function(position){
