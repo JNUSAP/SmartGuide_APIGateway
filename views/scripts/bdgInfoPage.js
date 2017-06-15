@@ -41,19 +41,18 @@ function AppendBdgInfo(id, bdgInfoBoard) {
         /*사진 */
         var imgDiv = createElement("div", "centerdiv", bdginfo);
         var img = createElement("img", "", imgDiv);
-        img.src = "http://52.78.17.235/img/" + bdgDB.buildingImg;
+        img.src = "http://52.78.17.235/img/" + bdgDB.buildingImage;
         img.id = "myImg" + bdgDB.buildingId;
-        img.onclick = function() {
-            modal.style.display = "block";
-            modalImg.src = this.src;
-            captionText.innerHTML = this.alt;
-        }
         var modal = createElement("div", "modal", imgDiv);
         modal.id = "myModal" + bdgDB.buildingId;
         var closeButton = createElement("span", "close", imgDiv);
         closeButton.onclick = "document.getElementById('myModal" + bdgDB.buildingId + "').style.display='none'";
         closeButton.innerHTML = "&times;"
         var span = closeButton[0];
+        img.onclick = function() {
+            modal.style.display = "block";
+            img.src = this.src;
+        }
         span.onclick = function() {
             modal.style.display = "none";
         }
