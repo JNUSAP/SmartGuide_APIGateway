@@ -34,17 +34,18 @@ function AppendBdgInfo(id, bdgInfoBoard) {
         /*GPS */
         var gpsDiv = createElement("div", "centerdiv", bdginfo);
         var lat = createElement("label", "GPSlabel", gpsDiv);
-        lat.innerHTML = bdgDB.buildingLatitude;
+        lat.innerHTML = "Latitude: " + bdgDB.buildingLatitude;
+        createElement("br", "", gpsDiv);
         var lng = createElement("label", "GPSlabel", gpsDiv);
-        lng.innerHTML = bdgDB.buildingLongitude;
+        lng.innerHTML = "Longitude: " + bdgDB.buildingLongitude;
         createElement("br", "", bdginfo);
         /*사진 */
         var imgDiv = createElement("div", "centerdiv", bdginfo);
         var img = createElement("img", "", imgDiv);
         img.src = "http://52.78.17.235/img/" + bdgDB.buildingImage;
         img.id = "myImg" + bdgDB.buildingId;
-        img.width = "120px";
-        img.height = "90px";
+        img.width = 240;
+        img.height = 180;
         createElement("br", "", bdginfo);
         /*별명들 */
         createElement("br", "", bdginfo);
