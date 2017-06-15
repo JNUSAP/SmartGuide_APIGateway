@@ -13,6 +13,8 @@ block content
     p
     p
     p
-    form(class="w3-container" action="/bdgInfo" method="GET")
-        input(type="text" name="BdgName" class="w3-input")
-        input(type="submit" class="searchButton" value="검색")
+    div(class="searchForm")
+        form(class="w3-container" action="/bdgInfo" method="GET")
+            input(type="text" name="BdgName" class="w3-input" id="searchBar")
+            p
+            input(type="submit" margin="0 auto" class="searchButton" value="검색")

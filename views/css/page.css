@@ -25,13 +25,17 @@
 
 .searchForm {
     margin: auto;
+    text-align: center;
 }
 
-.searchBar {
-    min-width: 80%;
+#searchBar {
+    margin:auto;
+    min-width: 70%;
 }
 
 .searchButton {
+    min-width:10%;
+    margin: auto;
     background-color: #4CAF50;
     /* Green */
     border: none;
