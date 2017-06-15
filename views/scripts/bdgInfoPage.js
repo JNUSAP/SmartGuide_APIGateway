@@ -43,8 +43,8 @@ function AppendBdgInfo(id, bdgInfoBoard) {
         var img = createElement("img", "", imgDiv);
         img.src = "http://52.78.17.235/img/" + bdgDB.buildingImage;
         img.id = "myImg" + bdgDB.buildingId;
-        ing.width = "120px";
-        ing.height = "90px";
+        img.width = "120px";
+        img.height = "90px";
         createElement("br", "", bdginfo);
         /*별명들 */
         createElement("br", "", bdginfo);
