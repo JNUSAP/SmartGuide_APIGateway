@@ -2,7 +2,7 @@ extends ./layout.pug
 block title
     title 건물 추가 페이지
 block content
-    p 건물을 등록합니다.
+    h1(text-align="center") 건물을 등록합니다.
     div(id="map" style="width:500px;height:400px;")
     form(id="data" method="post" enctype="multipart/form-data" action="../bdg")
         p Latitude:
@@ -17,7 +17,7 @@ block content
         input(type="file" name="img" placeholder="이미지")
         input(type="submit" value="등록")
         p
-        input(type="button" name="현재 위치 반영" onclick="setPosition()")
+        input(type="button" value="현재 위치 반영" onclick="setPosition()")
 
         script(src="//apis.daum.net/maps/maps3.js?apikey=9e7b4f02cc89fa18ab3e9ca9cb7e6898")
         script.
