@@ -48,7 +48,7 @@ function AppendBdgInfo(id, bdgInfoBoard) {
             modalImg.src = this.src;
             captionText.innerHTML = this.alt;
         }
-        var modal = creatElement("div", "modal", imgDiv);
+        var modal = createElement("div", "modal", imgDiv);
         modal.id = "myModal" + bdgDB.buildingId;
         var closeButton = createElement("span", "close", imgDiv);
         closeButton.onclick = "document.getElementById('myModal" + bdgDB.buildingId + "').style.display='none'";
