@@ -1,14 +1,18 @@
 extends ./userlayout.pug
 block title
     title 실패!
+    style
+        include css/page.css
+    link(rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css")
 block content
     h1(align="center") 검색에 실패했습니다. 어떤 건물이 있는지 알려주시겠어요?
-    
-    form(action="/suggestBdg" method="POST")
-        p 건물 이름 :
-        input(type="text" name="suggestTitle")
-        br
-        p 제안 내용 :
-        input(type="form" name="suggestContent")
-        br
-        input(type="submit" value="제안하기")
+    div(class="searchForm")
+        form(action="/suggestBdg" class="w3-container" method="POST")
+            label(text-align="left") 건물 이름
+            input(type="text" class="w3-input")
+            br
+            label(text-align="left") 제안 내용
+            br
+            textarea(class="suggestContent")
+            br
+            input(type="submit" class="searchButton" value="제안하기")
