@@ -30,16 +30,15 @@ function MessageButton(id) {
 }
 
 
-
 function Photo(imgPath) {
-    this.url = config.imgBase + imgPath;
+    this.url = config.host + "/img/" + imgPath;
     this.width = 640;
     this.height = 480;
 }
 
 function FailedKakaoMessage() {
     this.text = "검색에 실패했습니다.";
-    this.photo = new Photo(config.imgBase + "failed");
+    this.photo = new Photo("failed");
     this.message_button = new FailedMessageButton();
 }
 
