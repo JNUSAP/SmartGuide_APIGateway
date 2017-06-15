@@ -50,12 +50,14 @@ function AppendBdgInfo(id, bdgInfoBoard) {
         closeButton.innerHTML = "&times;"
         var span = closeButton[0];
         img.onclick = function() {
-            modal.style.display = "block";
-            img.src = this.src;
-        }
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+                modal.style.display = "block";
+                img.src = this.src;
+            }
+            /*
+                    span.onclick = function() {
+                        modal.style.display = "none";
+                    }
+                    */
         var modalImage = createElement("img", "modal-content", imgDiv);
         modalImage.id = "img" + bdgDB.buildingId;
 
