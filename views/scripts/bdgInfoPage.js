@@ -29,7 +29,7 @@ function AppendBdgInfo(id, bdgInfoBoard) {
             return element;
         }
 
-        createElement("h3", "bdgTitle", bdginfo)
+        createElement("h6", "bdgTitle", bdginfo)
             .innerHTML = bdgDB.buildingName;
         var content = createElement("textarea", "bdgContent", bdginfo)
         content.innerHTML = "GPS:" + bdgDB.buildingLongitude + "," + bdgDB.buildingLatitude;

@@ -29,18 +29,16 @@ function AppendSuggestInfo(id, suggestBoard) {
             return element;
         }
 
-        createElement("p", "suggestTitle", suggestInfo)
+        createElement("h6", "suggestTitle", suggestInfo)
             .innerHTML = bdgSuggest.suggestTitle;
         var content = createElement("textarea", "suggestContent", suggestInfo)
         content.innerHTML = bdgSuggest.suggestContent;
         content.disabled = true;
         createElement("br", "", suggestInfo);
-        var addButton = createElement("button", "acceptButton",
-                suggestInfo,
-                function() { console.log("event") })
+        var buttondiv = createElement("div", "centerdiv", suggest);
+        createElement("button", "w3-button w3-green", buttondiv)
             .innerHTML = "추가";
-        var deleteButton = createElement("button", "deleteButton",
-                suggestInfo, "location.href = '/bdgAdd'")
+        createElement("button", "w3-button w3-red", buttondiv)
             .innerHTML = "삭제";
         return suggestBoard.append(suggestInfo);
     });
