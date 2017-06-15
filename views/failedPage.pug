@@ -9,10 +9,10 @@ block content
     div(class="searchForm")
         form(action="/suggestBdg" class="w3-container" method="POST")
             label(text-align="left") 건물 이름
-            input(type="text" class="w3-input")
+            input(type="text" name="suggestTitle" class="w3-input")
             br
             label(text-align="left") 제안 내용
             br
-            textarea(class="suggestContent")
+            textarea(class="suggestContent" name="suggestContent")
             br
             input(type="submit" class="searchButton" value="제안하기")
