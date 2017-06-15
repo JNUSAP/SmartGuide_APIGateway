@@ -1,6 +1,9 @@
 extends ./layout.pug
 block title
     title 건물 정보 관리 페이지
+    style
+        include css/page.css
+    link(rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css")
 block content
     h1(align="center") 건물 정보 관리 페이지입니다.
     div(name="bdgInfoBoard" class="bdgInfoBoard")

@@ -26,17 +26,17 @@
 .searchForm {
     margin: auto;
     text-align: center;
-    min-height:50%;
-    max-height:70%;
+    min-height: 50%;
+    max-height: 70%;
 }
 
 #searchBar {
-    margin:auto;
+    margin: auto;
     min-width: 70%;
 }
 
 .searchButton {
-    min-width:10%;
+    min-width: 10%;
     margin: auto;
     background-color: #4CAF50;
     /* Green */
@@ -48,9 +48,24 @@
     display: inline-block;
     font-size: 16px;
 }
-.suggestContent{
+
+.bdgTitle {
+    margin: auto;
+}
+
+.bdgContent {
     min-width: 70%;
-    height:250px;
+    height: 250px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+}
+
+.suggestContent {
+    min-width: 70%;
+    height: 250px;
     padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;

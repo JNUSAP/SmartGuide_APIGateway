@@ -16,8 +16,8 @@ function isBottom() {
 }
 
 function AppendBdgInfo(id, bdgInfoBoard) {
-    var bdginfo = document.createElement("div");
-    bdginfo.className = "bdgInfo";
+    var bdginfo = document.createElement("form");
+    bdginfo.className = "w3-container";
     getBdgInfo(id, function(bdgDB) {
         /*REST로 건물 정보를 얻은 뒤 호출되는 함수*/
 
