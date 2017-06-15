@@ -33,36 +33,20 @@ function AppendBdgInfo(id, bdgInfoBoard) {
             .innerHTML = bdgDB.buildingName;
         /*GPS */
         var gpsDiv = createElement("div", "centerdiv", bdginfo);
-        var lat = createElement("label", "", gpsDiv);
-        lat.value = bdgDB.buildingLatitude;
-        var lng = createElement("label", "", gpsDiv);
-        lng.value = bdgDB.buildingLongitude;
+        var lat = createElement("label", "GPSlabel", gpsDiv);
+        lat.value = "" + bdgDB.buildingLatitude;
+        var lng = createElement("label", "GPSlabel", gpsDiv);
+        lng.value = "" + bdgDB.buildingLongitude;
         createElement("br", "", bdginfo);
         /*사진 */
         var imgDiv = createElement("div", "centerdiv", bdginfo);
         var img = createElement("img", "", imgDiv);
         img.src = "http://52.78.17.235/img/" + bdgDB.buildingImage;
         img.id = "myImg" + bdgDB.buildingId;
-        var modal = createElement("div", "modal", imgDiv);
-        modal.id = "myModal" + bdgDB.buildingId;
-        var closeButton = createElement("span", "close", imgDiv);
-        closeButton.onclick = "document.getElementById('myModal" + bdgDB.buildingId + "').style.display='none'";
-        closeButton.innerHTML = "&times;"
-        var span = closeButton[0];
-        img.onclick = function() {
-                modal.style.display = "block";
-                img.src = this.src;
-            }
-            /*
-                    span.onclick = function() {
-                        modal.style.display = "none";
-                    }
-                    */
-        var modalImage = createElement("img", "modal-content", imgDiv);
-        modalImage.id = "img" + bdgDB.buildingId;
-
         createElement("br", "", bdginfo);
         /*별명들 */
+        createElement("br", "", bdginfo);
+        /*버튼 */
         var buttondiv = createElement("div", "centerdiv", bdginfo);
         createElement("button", "w3-button w3-green", buttondiv)
             .innerHTML = "수정";
