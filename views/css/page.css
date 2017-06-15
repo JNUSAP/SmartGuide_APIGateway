@@ -49,6 +49,11 @@
     font-size: 16px;
 }
 
+.centerdiv {
+    margin: auto;
+    text-align: center;
+}
+
 .bdgTitle {
     margin: auto;
 }

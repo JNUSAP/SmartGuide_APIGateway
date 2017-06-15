@@ -29,15 +29,16 @@ function AppendBdgInfo(id, bdgInfoBoard) {
             return element;
         }
 
-        createElement("p", "bdgTitle", bdginfo)
+        createElement("h3", "bdgTitle", bdginfo)
             .innerHTML = bdgDB.buildingName;
         var content = createElement("textarea", "bdgContent", bdginfo)
         content.innerHTML = "GPS:" + bdgDB.buildingLongitude + "," + bdgDB.buildingLatitude;
         content.disabled = true;
         createElement("br", "", bdginfo);
-        createElement("button", "acceptButton", bdginfo)
+        var buttondiv = createElement("div", "centerdiv", bdginfo);
+        createElement("button", "w3-button w3-green", buttondiv)
             .innerHTML = "추가";
-        createElement("button", "deleteButton", bdginfo)
+        createElement("button", "w3-button w3-red", buttondiv)
             .innerHTML = "삭제";
         return bdgInfoBoard.append(bdginfo);
     });
