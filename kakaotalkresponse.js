@@ -20,7 +20,7 @@ function NullKakaoResponse() {
 
 function KakaoMessage(id, name, imgPath) {
     this.text = name;
-    this.photo = new Photo(config.imgBase + imgPath);
+    this.photo = new Photo(imgPath);
     this.message_button = new MessageButton(id);
 }
 
@@ -32,7 +32,7 @@ function MessageButton(id) {
 
 
 function Photo(imgPath) {
-    this.url = imgPath;
+    this.url = config.imgBase + imgPath;
     this.width = 640;
     this.height = 480;
 }
