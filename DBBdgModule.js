@@ -69,7 +69,8 @@ exports.deleteInfo = function(id) {
 exports.setInfo = function(bdgInfo) {
     var query = util.format('INSERT INTO buildingInfo(buildingName, buildingImage,buildingLongitude, buildingLatitude, buildingMsg1) VALUES (\'%s\', \'%s\',%d, %d, \'%s\');', bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1);
     connector.query(query);
-    setNickName(id, bdgInfo.buildingName);
+    /*별명 테이블에 본명 갱신 */
+    setNickName(getId(bdgInfo.buildingName), bdgInfo.buildingName);
 };
 exports.modifyInfo = function(id, bdgInfo) {
     var query = util.format('UPDATE buildingInfo SET buildingName=\'%s\', SET buildingImage=\'%s\', buildingLongitude=%d, buildingLatitude=%d, buildingMsg1=\'%s\', WHERE buildingId = %d;',
