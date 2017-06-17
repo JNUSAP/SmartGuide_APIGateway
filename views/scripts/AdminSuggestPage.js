@@ -25,7 +25,7 @@ function createElement(typeName, className, obj, event) {
     return element;
 }
 
-function SuggestInfo(bdgSuggest) {
+function makeSuggestInfo(bdgSuggest) {
     var suggestInfo = document.createElement("div");
     suggestInfo.className = "suggestInfo";
 
@@ -48,12 +48,13 @@ function SuggestInfo(bdgSuggest) {
     this.deleteButton = createElement("button", "w3-button w3-red", this.buttondiv)
     this.deleteButton.innerHTML = "삭제";
     this.deleteButton.onclick = "deleteSuggest(bdgSuggest.suggestId)";
+    return suggestInfo;
 }
 
 function AppendSuggestInfo(id, suggestBoard) {
     getSuggest(id, function(bdgSuggest) {
-        var suggestInfo = new SuggestInfo(bdgSuggest);
-        return suggestBoard.append(suggestInfo.toString());
+        var suggestInfo = makeSuggestInfo(bdgSuggest);
+        suggestBoard.append(suggestInfo);
     });
 }
 
