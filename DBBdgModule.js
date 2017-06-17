@@ -17,8 +17,10 @@ exports.getInfoByNickName = function(nickname) {
                 reject(new Building(-1));
             }
             /*ID를 쿼리한 뒤 닉네임 획득*/
-            var building = getInfoById(result.buildingId);
-            resolve(building);
+            var building = getInfoById(result.buildingId).then(function(result) {
+                return result;
+            });
+
         });
     }).catch(function() {
         console.log("getNickname promised return error");
