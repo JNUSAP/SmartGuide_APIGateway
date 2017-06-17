@@ -97,7 +97,7 @@ function deleteSuggest(id, element) {
         if (req.readyState == 4 && req.status == 200) {
             alert("삭제되었습니다.");
             return element.parentNode.removeChild(element);
-        } else {
+        } else if (req.readyState == 4 && req.status == 404) {
             console.log("suggest request err.");
             return alert("삭제 중 오류가 발생했습니다.");
         }
