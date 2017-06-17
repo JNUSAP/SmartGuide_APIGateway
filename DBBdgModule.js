@@ -93,7 +93,7 @@ exports.setNickname = function(id, nickname) {
     connector.query(query);
 }
 exports.getInfoByNickName = function(nickname) {
-    var query = util.format('SELECT * FROM secondName WHERE secondName \'%s\';', nickname);
+    var query = util.format('SELECT * FROM secondName WHERE secondName= \'%s\';', nickname);
 
     return connector.query(query).then(function(result) {
         return new Promise(function(resolve, reject) {
