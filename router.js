@@ -96,14 +96,7 @@ function addBdgREST(app) {
         res.status(204).send();
     });
 
-    app.delete('/bdg/:id', function(req, res) {
-        var id = req.params.id;
-        DBBdgModule.deleteInfo(id).then(function(isSuccess) {
-            console.log("bdg deleted:");
-            if (isSuccess) res.status(200).send();
-            else res.status(404).send();
-        });
-    });
+
 
     /*JSON 형식 건물 정보 */
     app.get('/bdg/info/:id', function(req, res) {
@@ -111,6 +104,19 @@ function addBdgREST(app) {
         DBBdgModule.getInfoById(id).then(function(building) {
             if (building.buildingId == -1) res.status(404).send();
             else res.json(building);
+        });
+    });
+    app.put('/bdg/info:id', function(req, res) {
+        var bdgInfo = new Building(req.params.id, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
+        ImageProvider.makeThumbnail(req.file.filename);
+        DBBdgModule.modifyInfo(req.params.id, bdgInfo);
+    });
+    app.delete('/bdg/info/:id', function(req, res) {
+        var id = req.params.id;
+        DBBdgModule.deleteInfo(id).then(function(isSuccess) {
+            console.log("bdg deleted:");
+            if (isSuccess) res.status(200).send();
+            else res.status(404).send();
         });
     });
     app.post('/bdg/nickname', function(req, res) {
