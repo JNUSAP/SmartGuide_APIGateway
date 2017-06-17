@@ -95,9 +95,9 @@ exports.setInfo = function(bdgInfo) {
     /*별명 테이블에 본명 갱신 */
     var setNickname = this.setNickname;
     console.log("set inner Name:");
-    this.getId(bdgInfo.buildingName).then(function(id) {
-        console.log(id);
-        setNickname(id, bdgInfo.buildingName);
+    this.getId(bdgInfo.buildingName).then(function(result) {
+        console.log(result);
+        setNickname(result.buildingId, bdgInfo.buildingName);
     });
 };
 exports.modifyInfo = function(id, bdgInfo) {

@@ -86,8 +86,8 @@ function addBdgREST(app) {
         console.log("set Name:");
         DBBdgModule.setInfo(bdgInfo);
         console.log("set Nickname:");
-        DBBdgModule.getId(req.body.name).then(function(id) {
-            DBBdgModule.setNickname(id, req.body.nickname);
+        DBBdgModule.getId(req.body.name).then(function(result) {
+            DBBdgModule.setNickname(result.buildingId, req.body.nickname);
         });
         res.status(204).send();
     });
