@@ -9,7 +9,7 @@ exports.setNickname = function(id, nickname) {
     var query = util.format("INSERT INTO secondName(secondName, buildingId) VALUES (\'%s\', %d);", nickname, id);
     connector.query(query);
 }
-exports.getInfoByNickName = function(nickname) {
+exports.getIdByNickName = function(nickname) {
     var query = util.format('SELECT * FROM secondName WHERE secondName= \'%s\';', nickname);
 
     return connector.query(query).then(function(result) {
@@ -19,21 +19,20 @@ exports.getInfoByNickName = function(nickname) {
                 reject(new Building(-1));
             }
             /*ID를 쿼리한 뒤 닉네임 획득*/
-            console.log("before getNick");
-            console.log(result);
-            resolve(function(result) {
-                console.log("nick:");
-                console.log(result);
-                return getInfoById(result.buildingId);
-            });
-            console.log("After getNick");
+            /*result = RowDataPacket{nickId, secondName, buildingId} */
+            resolve(result.buildingId);
         });
     }).catch(function() {
         console.log("getNickname promised return error");
         return new Building(-1);
     });
-};
+}
 
+exports.getInfoByNickName = function(nickname) {
+    this.getIdByNickName(nickname).then(function(id) {
+        return getInfoById(id);
+    });
+}
 exports.getInfo = function(bdgName) {
     var query = util.format('SELECT * FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
 
