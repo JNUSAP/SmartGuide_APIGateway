@@ -43,12 +43,15 @@ function makeSuggestInfo(bdgSuggest) {
     this.addButton = createElement("button", "w3-button w3-green", this.buttondiv);
 
     this.addButton.innerHTML = "추가";
-    this.addButton.onclick = function() { alert('help!') };
+    this.addButton.onclick = function() {
+        location.href = '/admin/bdgAdd'
+    };
 
     this.deleteButton = createElement("button", "w3-button w3-red", this.buttondiv)
     this.deleteButton.innerHTML = "삭제";
     this.deleteButton.onclick = function() {
-        deleteSuggest(bdgSuggest.suggestId, suggestInfo);
+        if (confirm("정말로 삭제하시겠습니까?") == true)
+            deleteSuggest(bdgSuggest.suggestId, suggestInfo);
     };
     return suggestInfo;
 }
