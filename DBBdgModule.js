@@ -30,7 +30,7 @@ exports.getIdByNickName = function(nickname) {
 
 exports.getInfoByNickName = function(nickname) {
     this.getIdByNickName(nickname).then(function(id) {
-        return getInfoById(id);
+        return this.getInfoById(id);
     });
 }
 exports.getInfo = function(bdgName) {
