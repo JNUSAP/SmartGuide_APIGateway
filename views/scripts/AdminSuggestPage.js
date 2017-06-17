@@ -30,21 +30,24 @@ function SuggestInfo(bdgSuggest) {
     suggestInfo.className = "suggestInfo";
 
     this.title = createElement("h6", "suggestTitle", suggestInfo);
-    title.innerHTML = bdgSuggest.suggestTitle;
+    this.title.innerHTML = bdgSuggest.suggestTitle;
 
     this.content = createElement("textarea", "suggestContent", suggestInfo);
-    content.innerHTML = bdgSuggest.suggestContent;
-    content.disabled = true;
+    this.content.innerHTML = bdgSuggest.suggestContent;
+    this.content.disabled = true;
 
     createElement("br", "", suggestInfo);
 
     this.buttondiv = createElement("div", "centerdiv", suggestInfo);
+
     this.addButton = createElement("button", "w3-button w3-green", buttondiv);
-    AddButton.innerHTML = "추가";
-    AddButton.onclick = alert("help!");
+
+    this.AddButton.innerHTML = "추가";
+    this.AddButton.onclick = alert("help!");
+
     this.deleteButton = createElement("button", "w3-button w3-red", buttondiv)
-    deleteButton.innerHTML = "삭제";
-    deleteButton.onclick = deleteSuggest(bdgSuggest.suggestId);
+    this.deleteButton.innerHTML = "삭제";
+    this.deleteButton.onclick = deleteSuggest(bdgSuggest.suggestId);
 }
 
 function AppendSuggestInfo(id, suggestBoard) {
