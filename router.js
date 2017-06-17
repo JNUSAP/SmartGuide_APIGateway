@@ -96,7 +96,7 @@ function addBdgREST(app) {
         res.status(204).send();
     });
 
-    app.delete('/suggestBdg/:id', function(req, res) {
+    app.delete('/bdg/:id', function(req, res) {
         var id = req.params.id;
         DBBdgModule.deleteInfo(id).then(function(isSuccess) {
             if (isSuccess) res.status(200).send();
