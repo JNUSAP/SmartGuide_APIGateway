@@ -4,7 +4,7 @@ const util = require('util');
 var Mock = new Building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
 
 exports.setNickname = function(id, nickname) {
-    var query = util.format("INSERT INRO secondName(secondname, buildingId) VALUES (\'%s\', %d);", nickname, id);
+    var query = util.format("INSERT INRO secondName(secondName, buildingId) VALUES (\'%s\', %d);", nickname, id);
     connector.query(query);
 }
 exports.getInfoByNickName = function(nickname) {
