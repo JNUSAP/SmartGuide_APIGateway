@@ -6,7 +6,7 @@ exports.searchByName = function(keyword) {
 
 }
 exports.setNickname = function(id, nickname) {
-    var query = util.format("INSERT INTO secondName(secondName, buildingId) VALUES (\'%s\', %d);", nickname, id);
+    var query = util.format("INSERT INTO secondName(secondName, buildingId, refcount) VALUES (\'%s\', %d, 0);", nickname, id);
     connector.query(query);
 }
 exports.getIdByNickName = function(nickname) {
@@ -29,9 +29,10 @@ exports.getIdByNickName = function(nickname) {
 }
 
 exports.getInfoByNickName = function(nickname) {
+    console.log("getInfoByNick");
     var func = this.getInfoById;
-    this.getIdByNickName(nickname).then(function(id) {
-        console.log(id);
+    return this.getIdByNickName(nickname).then(function(id) {
+        console.log("getidByNick");
         return func(id);
     });
 }
