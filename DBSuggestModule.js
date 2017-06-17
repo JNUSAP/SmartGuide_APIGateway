@@ -18,7 +18,7 @@ exports.getSuggest = function(id) {
             resolve(suggest);
         });
     }).catch(function() {
-        console.log("getInfo promised return error");
+        console.log("getSuggest promised return error");
         return new BdgSuggest(-1);
     });
 };
