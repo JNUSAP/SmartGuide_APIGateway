@@ -61,7 +61,7 @@ function addBdgREST(app) {
     app.get('/bdgInfo', function(req, res) {
         var bdgName = req.query.BdgName;
         DBBdgModule.getInfoByNickName(bdgName).then(function(building) {
-            nicknameRefered(bdgName);
+            DBBdgModule.nicknameRefered(bdgName);
             var id = building.buildingId;
             res.redirect('/bdg/' + id);
         });
