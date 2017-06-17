@@ -53,7 +53,7 @@ function makeBdgInfo(bdgDB) {
     modifyButton.innerHTML = "별명 추가";
     modifyButton.onclick = function() {
         var nickname = prompt("별명을 입력하세요", "");
-        if (nickname == null || nicknuame == "") {
+        if (nickname == null || nickname == "") {
 
         } else {
             AddBdgNickname(bdgDB.buildingId, nickname);
@@ -63,9 +63,9 @@ function makeBdgInfo(bdgDB) {
     deleteButton.innerHTML = "삭제";
     deleteButton.onclick = function() {
         if (confirm("정말로 삭제하시겠습니까?") == true)
-            deleteBdgInfo(bdgDB.buildingId, bdgInfo)
+            deleteBdgInfo(bdgDB.buildingId, bdginfo)
     };
-    return bdgInfo;
+    return bdginfo;
 }
 
 function AppendBdgInfo(id, bdgInfoBoard) {
