@@ -19,8 +19,9 @@ exports.getInfoByNickName = function(nickname) {
                 reject(new Building(-1));
             }
             /*ID를 쿼리한 뒤 닉네임 획득*/
-            resolve(function(result) {
-                return getInfoById(result.buildingId)
+            getInfoById(result.buildingId).then(function(result) {
+                /* */
+                resolve(result);
             });
         });
     }).catch(function() {
