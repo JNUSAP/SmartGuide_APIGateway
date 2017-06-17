@@ -94,6 +94,7 @@ exports.setInfo = function(bdgInfo) {
     connector.query(query);
     /*별명 테이블에 본명 갱신 */
     var setNickname = this.setNickname;
+    console.log("set inner Name:");
     this.getId(bdgInfo.buildingName).then(function(id) {
         console.log(id);
         setNickname(id, bdgInfo.buildingName);
