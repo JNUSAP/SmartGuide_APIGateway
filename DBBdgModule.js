@@ -20,8 +20,10 @@ exports.getInfoByNickName = function(nickname) {
             }
             /*ID를 쿼리한 뒤 닉네임 획득*/
             console.log("before getNick");
-            resolve(function() {
-                console.log("nick");
+            console.log(result);
+            resolve(function(result) {
+                console.log("nick:");
+                console.log(result);
                 return getInfoById(result.buildingId);
             });
             console.log("After getNick");
