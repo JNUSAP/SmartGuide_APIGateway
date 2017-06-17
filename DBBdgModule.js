@@ -67,7 +67,7 @@ exports.getId = function(bdgName) {
     return connector.query(query).then(function(result) {
         return new Promise(function(resolve, reject) {
             if (result == undefined) reject(-1);
-            console.log(getId + " = " + result);
+            console.log("getId= " + result);
             resolve(result);
         });
     });
