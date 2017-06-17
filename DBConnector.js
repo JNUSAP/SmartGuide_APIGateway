@@ -27,3 +27,22 @@ exports.query = function(query) {
         console.log("DBConnecor Promise returned Error");
     });
 };
+
+exports.queryAll = function(query) {
+    return new Promise(function(resolve, reject) {
+        connection.query(query, function(err, result) {
+            if (err) {
+                console.log(query);
+                console.log("err occurred :" + err.message);
+                reject(err);
+            } else {
+                console.log(query);
+                console.log("AllResults :");
+                console.log(result);
+                resolve(result);
+            }
+        });
+    }).catch(function() {
+        console.log("DBConnecor Promise returned Error");
+    });
+};

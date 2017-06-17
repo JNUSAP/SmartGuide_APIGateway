@@ -2,9 +2,6 @@ const connector = require('./DBConnector.js');
 const Building = require('./building.js');
 const util = require('util');
 var Mock = new Building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
-exports.getInfoByNickName = function(bdgName) {
-    return this.getInfo(bdgName);
-}
 
 exports.getInfo = function(bdgName) {
     var query = util.format('SELECT * FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
@@ -71,18 +68,72 @@ exports.getWayfindData = function(start, end) {
     return [Mock, Mock, Mock];
 };
 
-exports.setInfo = function(bdgInfo) {
-    var query = util.format('INSERT INTO buildingInfo(buildingName, buildingImage,buildingLongitude, buildingLatitude, buildingMsg1) VALUES (\'%s\', \'%s\',%d, %d, \'%s\');', bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1);
+exports.deleteInfo = function(id) {
+    var query = util.format("UPDATE buildingInfo SET buildingIsDeleted = TRUE, WHERE buildingId = %d;", id);
     connector.query(query);
 };
+exports.setInfo = function(id, bdgInfo) {
+    var query = util.format('UPDATE buildingInfo SET buildingName=\'%s\', SET buildingImage=\'%s\', buildingLongitude=%d, buildingLatitude=%d, buildingMsg1=\'%s\', WHERE buildingId = %d;',
+        bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1, id);
+    connector.query(query);
+    setNickName(id, bdginfo.buildingName);
+};
 exports.setName = function(id, name) {
-    console.log(id);
-    console.log(name);
+    var query = util.format("UPDATE buildingInfo SET buildingName=\'%s\, WHERE buildingId = %d;", id);
+    connector.query(query);
 };
 exports.setImgPath = function(id, path) {
-    console.log(id);
-    console.log(path);
+    var query = util.format("UPDATE buildingInfo SET buildingImage=\'%s\', WHERE buildingId = %d;", id);
+    connector.query(query);
 };
-exports.setNearBdgList = function(id) {
-    console.log(id);
+
+
+exports.setNickname = function(id, nickname) {
+    var query = util.format("INSERT INRO secondName(secondname, buildingId) VALUES (\'%s\', %d);", nickname, id);
+    connector.query(query);
+}
+exports.getInfoByNickName = function(nickname) {
+    var query = util.format('SELECT * FROM secondName WHERE secondName \'%s\';', nickname);
+
+    return connector.query(query).then(function(result) {
+        return new Promise(function(resolve, reject) {
+            if (result == undefined) {
+                console.log("getNickname : reject sent");
+                reject(new Building(-1));
+            }
+            /*ID를 쿼리한 뒤 닉네임 획득*/
+            var building = getInfoById(result.buildingId);
+            resolve(building);
+        });
+    }).catch(function() {
+        console.log("getNickname promised return error");
+        return new Building(-1);
+    });
+};
+
+exports.setNearBdg = function(id, toConnectId) {
+    var query = util.format("INSERT INRO nearBdg(buildingId,connectedBdg) VALUES (%d, %d);", id, toConnectId);
+
+    connector.query(query);
+}
+exports.getNearBdg = function(id) {
+    var query = util.format('SELECT * FROM nearBdg WHERE buildingId = %d;', id);
+
+    return connector.queryAll(query).then(function(result) {
+        return new Promise(function(resolve, reject) {
+            if (result == undefined) {
+                console.log("getNearBdg : reject sent");
+                reject(new Building(-1));
+            }
+
+            var nearId = new Array();
+            for (row in result) {
+                nearId.push(row[connectedBdg]);
+            }
+            resolve(nearId);
+        });
+    }).catch(function() {
+        console.log("getNearBdg promised return error");
+        return new Building(-1);
+    });
 };
