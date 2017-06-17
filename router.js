@@ -123,6 +123,9 @@ function addBdgREST(app) {
         /*건물의 별명을 설정한다. */
         var id = req.params.id;
         var nickname = req.body.nickname;
+        console.log(id)
+        console.log(nickname)
+        console.log("post nickname:")
         DBBdgModule.setNickname(id, nickname).then(function(isSuccess) {
             if (isSuccess) res.status(200).send();
             else res.status(404).send();
