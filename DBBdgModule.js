@@ -27,7 +27,10 @@ exports.getIdByNickName = function(nickname) {
         return new Building(-1);
     });
 }
-
+exports.nicknameRefered = function(nickname) {
+    var query = util.format("UPDATE secondName SET refCount = refCount+1, WHERE secondName= \'%s\'", id);
+    connector.query(query);
+};
 exports.getInfoByNickName = function(nickname) {
     console.log("getInfoByNick");
     var func = this.getInfoById;

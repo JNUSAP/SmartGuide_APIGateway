@@ -41,8 +41,10 @@ function SuggestInfo(bdgSuggest) {
     this.buttondiv = createElement("div", "centerdiv", suggestInfo);
     this.addButton = createElement("button", "w3-button w3-green", buttondiv);
     AddButton.innerHTML = "추가";
+    AddButton.onclick = alert("help!");
     this.deleteButton = createElement("button", "w3-button w3-red", buttondiv)
     deleteButton.innerHTML = "삭제";
+    deleteButton.onclick = deleteSuggest(bdgSuggest.suggestId);
 }
 
 function AppendSuggestInfo(id, suggestBoard) {
@@ -78,16 +80,14 @@ function getSuggest(id, func) {
     };
 }
 
-function deleteSuggest(id, func) {
+function deleteSuggest(id) {
     var req = new XMLHttpRequest();
     req.open('DELETE', '/suggestBdg/' + id);
     req.send(null);
     req.onreadystatechange = function(aEvt) {
         if (req.readyState == 4 && req.status == 200) {
-            console.log("success.");
-            console.log(req.responseText);
-            info = JSON.parse(req.responseText);
-            return func(info);
+            alert("삭제되었습니다.");
+            return 1;
         } else {
             console.log("suggest request err.");
             return -1;

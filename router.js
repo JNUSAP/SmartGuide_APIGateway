@@ -61,6 +61,7 @@ function addBdgREST(app) {
     app.get('/bdgInfo', function(req, res) {
         var bdgName = req.query.BdgName;
         DBBdgModule.getInfoByNickName(bdgName).then(function(building) {
+            nicknameRefered(bdgName);
             var id = building.buildingId;
             res.redirect('/bdg/' + id);
         });
@@ -127,6 +128,13 @@ function addSuggestREST(app) {
             DBSuggestModule.addSuggest(suggest);
             res.status(204).send();
         }
+    });
+    app.delete('/suggestBdg/:id', function(req, res) {
+        var id = req.params.id;
+        DBSuggestModule.deleteSuggest(id).then(function(suggest) {
+            if (suggest.suggestId == -1) res.status(404).send();
+            else res.status(200).send();
+        });
     });
 }
 
