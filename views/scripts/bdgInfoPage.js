@@ -109,31 +109,31 @@ function AddBdgNickname(id, nickname) {
     data.append('nickname', nickname);
 
     req.open('POST', '/bdg/nickname/' + id, true);
-    req.onload = function(e) {
+
+    req.onreadystatechange = function(aEvt) {
         if (req.readyState == 4 && req.status == 200) {
             console.log("success.");
             alert("추가되었습니다.");
+        } else if (req.readyState == 4 && req.status == 404) {
+            console.log("bdg request err.");
+            alert("오류가 발생했습니다.");
+            return -1;
         }
-    };
-    req.onerror = function(e) {
-        console.log("bdg request err.");
-        alert("오류가 발생했습니다.");
-        return -1;
     }
     req.send(data);
+
 }
 
 function deleteBdgInfo(id, element) {
     var req = new XMLHttpRequest();
     req.open('DELETE', '/bdg/info/' + id, true);
-    req.onload = function(e) {
+    req.onreadystatechange = function(aEvt) {
         if (req.readyState == 4 && req.status == 200) {
             alert("삭제되었습니다.");
             return element.parentNode.removeChild(element);
+        } else if (req.readyState == 4 && req.status == 404) {
+            return alert("삭제 중 오류가 발생했습니다.");
         }
     };
-    req.onerror = function(e) {
-        return alert("삭제 중 오류가 발생했습니다.");
-    }
     req.send(null);
 }

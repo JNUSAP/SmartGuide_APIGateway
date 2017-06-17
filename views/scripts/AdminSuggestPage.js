@@ -82,7 +82,7 @@ function getSuggest(id, func) {
             console.log(req.responseText);
             info = JSON.parse(req.responseText);
             return func(info);
-        } else {
+        } else if (req.readyState == 4 && req.status == 404) {
             console.log("suggest request err.");
             return -1;
         }
