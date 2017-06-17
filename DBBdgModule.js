@@ -3,6 +3,29 @@ const Building = require('./building.js');
 const util = require('util');
 var Mock = new Building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
 
+exports.setNickname = function(id, nickname) {
+    var query = util.format("INSERT INRO secondName(secondname, buildingId) VALUES (\'%s\', %d);", nickname, id);
+    connector.query(query);
+}
+exports.getInfoByNickName = function(nickname) {
+    var query = util.format('SELECT * FROM secondName WHERE secondName= \'%s\';', nickname);
+
+    return connector.query(query).then(function(result) {
+        return new Promise(function(resolve, reject) {
+            if (result == undefined) {
+                console.log("getNickname : reject sent");
+                reject(new Building(-1));
+            }
+            /*ID를 쿼리한 뒤 닉네임 획득*/
+            var building = getInfoById(result.buildingId);
+            resolve(building);
+        });
+    }).catch(function() {
+        console.log("getNickname promised return error");
+        return new Building(-1);
+    });
+};
+
 exports.getInfo = function(bdgName) {
     var query = util.format('SELECT * FROM buildingInfo WHERE buildingName = \'%s\';', bdgName);
 
@@ -70,7 +93,7 @@ exports.setInfo = function(bdgInfo) {
     var query = util.format('INSERT INTO buildingInfo(buildingName, buildingImage,buildingLongitude, buildingLatitude, buildingMsg1) VALUES (\'%s\', \'%s\',%d, %d, \'%s\');', bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1);
     connector.query(query);
     /*별명 테이블에 본명 갱신 */
-    setNickName(getId(bdgInfo.buildingName), bdgInfo.buildingName);
+    setNickname(getId(bdgInfo.buildingName), bdgInfo.buildingName);
 };
 exports.modifyInfo = function(id, bdgInfo) {
     var query = util.format('UPDATE buildingInfo SET buildingName=\'%s\', SET buildingImage=\'%s\', buildingLongitude=%d, buildingLatitude=%d, buildingMsg1=\'%s\', WHERE buildingId = %d;',
@@ -86,29 +109,6 @@ exports.modifyImgPath = function(id, path) {
     connector.query(query);
 };
 
-
-exports.setNickname = function(id, nickname) {
-    var query = util.format("INSERT INRO secondName(secondname, buildingId) VALUES (\'%s\', %d);", nickname, id);
-    connector.query(query);
-}
-exports.getInfoByNickName = function(nickname) {
-    var query = util.format('SELECT * FROM secondName WHERE secondName= \'%s\';', nickname);
-
-    return connector.query(query).then(function(result) {
-        return new Promise(function(resolve, reject) {
-            if (result == undefined) {
-                console.log("getNickname : reject sent");
-                reject(new Building(-1));
-            }
-            /*ID를 쿼리한 뒤 닉네임 획득*/
-            var building = getInfoById(result.buildingId);
-            resolve(building);
-        });
-    }).catch(function() {
-        console.log("getNickname promised return error");
-        return new Building(-1);
-    });
-};
 
 exports.setNearBdg = function(id, toConnectId) {
     var query = util.format("INSERT INRO nearBdg(buildingId,connectedBdg) VALUES (%d, %d);", id, toConnectId);
