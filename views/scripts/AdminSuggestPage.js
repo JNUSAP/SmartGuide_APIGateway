@@ -47,7 +47,9 @@ function makeSuggestInfo(bdgSuggest) {
 
     this.deleteButton = createElement("button", "w3-button w3-red", this.buttondiv)
     this.deleteButton.innerHTML = "삭제";
-    this.deleteButton.onclick = function() { deleteSuggest(bdgSuggest.suggestId) };
+    this.deleteButton.onclick = function() {
+        deleteSuggest(bdgSuggest.suggestId, suggestInfo);
+    };
     return suggestInfo;
 }
 
@@ -84,15 +86,17 @@ function getSuggest(id, func) {
     };
 }
 
-function deleteSuggest(id) {
+function deleteSuggest(id, element) {
     var req = new XMLHttpRequest();
     req.open('DELETE', '/suggestBdg/' + id);
     req.send(null);
     req.onreadystatechange = function(aEvt) {
         if (req.readyState == 4 && req.status == 200) {
             alert("삭제되었습니다.");
+            element.parentNode.removeChild(element);
             return 1;
         } else {
+            alert("삭제 중 오류가 발생했습니다.");
             console.log("suggest request err.");
             return -1;
         }
