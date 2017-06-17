@@ -61,12 +61,6 @@ exports.getImgPath = function(id) {
     console.log(result);
     return result[0];
 };
-exports.getNearBdgList = function(BdgId) {
-    return [Mock, Mock, Mock];
-}
-exports.getWayfindData = function(start, end) {
-    return [Mock, Mock, Mock];
-};
 
 exports.deleteInfo = function(id) {
     var query = util.format("UPDATE buildingInfo SET buildingIsDeleted = TRUE, WHERE buildingId = %d;", id);
@@ -76,7 +70,7 @@ exports.setInfo = function(id, bdgInfo) {
     var query = util.format('UPDATE buildingInfo SET buildingName=\'%s\', SET buildingImage=\'%s\', buildingLongitude=%d, buildingLatitude=%d, buildingMsg1=\'%s\', WHERE buildingId = %d;',
         bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1, id);
     connector.query(query);
-    setNickName(id, bdginfo.buildingName);
+    setNickName(id, bdgInfo.buildingName);
 };
 exports.setName = function(id, name) {
     var query = util.format("UPDATE buildingInfo SET buildingName=\'%s\, WHERE buildingId = %d;", id);
