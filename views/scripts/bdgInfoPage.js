@@ -23,7 +23,7 @@ function createElement(typeName, className, obj) {
     return element;
 }
 
-function makeBdgInfo(bdgSuggest) {
+function makeBdgInfo(bdgDB) {
     var bdginfo = document.createElement("form");
     bdginfo.className = "w3-container";
     /*이름*/
@@ -125,7 +125,7 @@ function AddBdgNickname(id, nickname) {
 
 function deleteBdgInfo(id, element) {
     var req = new XMLHttpRequest();
-    req.open('GET', '/bdg/info/' + id, true);
+    req.open('DELETE', '/bdg/info/' + id, true);
     req.onload = function(e) {
         if (req.readyState == 4 && req.status == 200) {
             alert("삭제되었습니다.");
