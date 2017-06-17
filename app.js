@@ -15,6 +15,7 @@ var file = require(fileName);
 
 /*일부 폴더 정적 공유*/
 app.use("/img", express.static(__dirname + '/img')); // Route.addFiles()의 일부
+app.use("/thumb", express.static(__dirname + '/thumb')); // Route.addFiles()의 일부
 app.use("/views/scripts", express.static(__dirname + '/views/scripts')); // Route.addFiles()의 일부
 /*
 app.set('ports_https',httpsPort);

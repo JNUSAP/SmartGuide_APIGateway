@@ -1,4 +1,5 @@
 const MessageProvider = require("./MessageProvider.js");
+const ImageProvider = require("./ImageProvider.js");
 const bodyParser = require('body-parser');
 const path = require("path");
 const url = require('url');
@@ -78,7 +79,9 @@ function addBdgREST(app) {
 
     app.post('/bdg', function(req, res) {
         /*null과 undefined가 다른 것에 주의 */
+        /*multer가 파일을 저장하고, ImageProvider로 썸네일을 만든다. */
         var bdgInfo = new Building(null, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
+        ImageProvider.makeThumbnail(req.file.filename);
         console.log("get:");
         console.log(req.body.name);
         console.log(req.file.filename);

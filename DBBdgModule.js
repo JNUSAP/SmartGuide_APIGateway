@@ -2,7 +2,9 @@ const connector = require('./DBConnector.js');
 const Building = require('./building.js');
 const util = require('util');
 var Mock = new Building(0, "공대 7호관", "abcde.jpg", 10.123, 10.234, "");
+exports.searchByName = function(keyword) {
 
+}
 exports.setNickname = function(id, nickname) {
     var query = util.format("INSERT INTO secondName(secondName, buildingId) VALUES (\'%s\', %d);", nickname, id);
     connector.query(query);
