@@ -50,8 +50,15 @@ function makeBdgInfo(bdgSuggest) {
     /*버튼 */
     var buttondiv = createElement("div", "centerdiv", bdginfo);
     var modifyButton = createElement("button", "w3-button w3-green", buttondiv)
-    modifyButton.innerHTML = "수정";
-    modifyButton.onclick = function() {};
+    modifyButton.innerHTML = "별명 추가";
+    modifyButton.onclick = function() {
+        var nickname = prompt("별명을 입력하세요", "");
+        if (nickname == null || nicknuame == "") {
+
+        } else {
+            AddBdgNickname(bdgDB.buildingId, nickname);
+        }
+    };
     var deleteButton = createElement("button", "w3-button w3-red", buttondiv)
     deleteButton.innerHTML = "삭제";
     deleteButton.onclick = function() {
@@ -94,6 +101,26 @@ function getBdgInfo(id, func) {
         return -1;
     }
     req.send(null);
+}
+
+function AddBdgNickname(id, nickname) {
+    var req = new XMLHttpRequest();
+    var data = new FormData();
+    data.append('nickname', nickname);
+
+    req.open('POST', '/bdg/nickname/' + id, true);
+    req.onload = function(e) {
+        if (req.readyState == 4 && req.status == 200) {
+            console.log("success.");
+            alert("추가되었습니다.");
+        }
+    };
+    req.onerror = function(e) {
+        console.log("bdg request err.");
+        alert("오류가 발생했습니다.");
+        return -1;
+    }
+    req.send(data);
 }
 
 function deleteBdgInfo(id, element) {

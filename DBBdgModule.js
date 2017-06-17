@@ -7,7 +7,18 @@ exports.searchByName = function(keyword) {
 }
 exports.setNickname = function(id, nickname) {
     var query = util.format("INSERT INTO secondName(secondName, buildingId, refcount) VALUES (\'%s\', %d, 0);", nickname, id);
-    connector.query(query);
+    return connector.queryAll(query).then(function(result) {
+        return new Promise(function(resolve, reject) {
+            /*Mysql 모듈의 OKPacket*/
+            if (result.affectedRows >= 1) {
+                resolve(true);
+            }
+            reject(false);
+        });
+    }).catch(function() {
+        console.log("deleteInfo failed");
+        return false;
+    });
 }
 exports.getIdByNickName = function(nickname) {
     var query = util.format('SELECT * FROM secondName WHERE secondName= \'%s\';', nickname);
@@ -28,7 +39,7 @@ exports.getIdByNickName = function(nickname) {
     });
 }
 exports.nicknameRefered = function(nickname) {
-    var query = util.format("UPDATE secondName SET refCount = refCount+1, WHERE secondName= \'%s\'", id);
+    var query = util.format("UPDATE secondName SET refCount = refCount+1 WHERE secondName= \'%s\'", id);
     connector.query(query);
 };
 exports.getInfoByNickName = function(nickname) {
@@ -99,8 +110,19 @@ exports.getImgPath = function(id) {
 };
 
 exports.deleteInfo = function(id) {
-    var query = util.format("UPDATE buildingInfo SET buildingIsDeleted = TRUE, WHERE buildingId = %d;", id);
-    connector.query(query);
+    var query = util.format("UPDATE buildingInfo SET buildingIsDeleted = TRUE WHERE buildingId = %d;", id);
+    return connector.queryAll(query).then(function(result) {
+        return new Promise(function(resolve, reject) {
+            /*Mysql 모듈의 OKPacket*/
+            if (result.affectedRows >= 1) {
+                resolve(true);
+            }
+            reject(false);
+        });
+    }).catch(function() {
+        console.log("deleteInfo failed");
+        return false;
+    });
 };
 exports.setInfo = function(bdgInfo) {
     var query = util.format('INSERT INTO buildingInfo(buildingName, buildingImage,buildingLongitude, buildingLatitude, buildingMsg1) VALUES (\'%s\', \'%s\',%d, %d, \'%s\');', bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1);
@@ -114,16 +136,16 @@ exports.setInfo = function(bdgInfo) {
     });
 };
 exports.modifyInfo = function(id, bdgInfo) {
-    var query = util.format('UPDATE buildingInfo SET buildingName=\'%s\', SET buildingImage=\'%s\', buildingLongitude=%d, buildingLatitude=%d, buildingMsg1=\'%s\', WHERE buildingId = %d;',
+    var query = util.format('UPDATE buildingInfo SET buildingName=\'%s\', SET buildingImage=\'%s\', buildingLongitude=%d, buildingLatitude=%d, buildingMsg1=\'%s\' WHERE buildingId = %d;',
         bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1, id);
     connector.query(query);
 };
 exports.modifyName = function(id, name) {
-    var query = util.format("UPDATE buildingInfo SET buildingName=\'%s\, WHERE buildingId = %d;", id);
+    var query = util.format("UPDATE buildingInfo SET buildingName=\'%s\ WHERE buildingId = %d;", id);
     connector.query(query);
 };
 exports.modifyImgPath = function(id, path) {
-    var query = util.format("UPDATE buildingInfo SET buildingImage=\'%s\', WHERE buildingId = %d;", id);
+    var query = util.format("UPDATE buildingInfo SET buildingImage=\'%s\' WHERE buildingId = %d;", id);
     connector.query(query);
 };
 

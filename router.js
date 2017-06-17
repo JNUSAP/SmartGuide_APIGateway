@@ -96,12 +96,29 @@ function addBdgREST(app) {
         res.status(204).send();
     });
 
+    app.delete('/suggestBdg/:id', function(req, res) {
+        var id = req.params.id;
+        DBBdgModule.deleteInfo(id).then(function(isSuccess) {
+            if (isSuccess) res.status(200).send();
+            else res.status(404).send();
+        });
+    });
+
     /*JSON 형식 건물 정보 */
     app.get('/bdg/info/:id', function(req, res) {
         var id = req.params.id;
         DBBdgModule.getInfoById(id).then(function(building) {
             if (building.buildingId == -1) res.status(404).send();
             else res.json(building);
+        });
+    });
+    app.post('/bdg/nickname', function(req, res) {
+        /*건물의 별명을 설정한다. */
+        var id = req.params.id;
+        var nickname = req.body.nickname;
+        DBBdgModule.setNickname(id, nickname).then(function(isSuccess) {
+            if (isSuccess) res.status(200).send();
+            else res.status(404).send();
         });
     });
 
