@@ -67,6 +67,8 @@ exports.deleteInfo = function(id) {
     connector.query(query);
 };
 exports.setInfo = function(id, bdgInfo) {
+    console.log("bdgInfo:");
+    console.log(bdgInfo);
     var query = util.format('UPDATE buildingInfo SET buildingName=\'%s\', SET buildingImage=\'%s\', buildingLongitude=%d, buildingLatitude=%d, buildingMsg1=\'%s\', WHERE buildingId = %d;',
         bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1, id);
     connector.query(query);

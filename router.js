@@ -82,6 +82,7 @@ function addBdgREST(app) {
         console.log("get:");
         console.log(req.body.name);
         console.log(req.file.filename);
+	console.log(bdgInfo);
         DBBdgModule.setInfo(bdgInfo);
         res.status(204).send();
     });
