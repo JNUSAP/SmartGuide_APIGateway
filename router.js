@@ -99,6 +99,7 @@ function addBdgREST(app) {
     app.delete('/bdg/:id', function(req, res) {
         var id = req.params.id;
         DBBdgModule.deleteInfo(id).then(function(isSuccess) {
+            console.log("bdg deleted:");
             if (isSuccess) res.status(200).send();
             else res.status(404).send();
         });

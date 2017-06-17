@@ -39,7 +39,7 @@ exports.getIdByNickName = function(nickname) {
     });
 }
 exports.nicknameRefered = function(nickname) {
-    var query = util.format("UPDATE secondName SET refCount = refCount+1 WHERE secondName= \'%s\'", id);
+    var query = util.format("UPDATE secondName SET refCount = refCount+1 WHERE secondName= \'%s\'", nickname);
     connector.query(query);
 };
 exports.getInfoByNickName = function(nickname) {
