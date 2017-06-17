@@ -20,7 +20,7 @@ exports.getInfoByNickName = function(nickname) {
             }
             /*ID를 쿼리한 뒤 닉네임 획득*/
             var building = getInfoById(result.buildingId).then(function(result) {
-                return result;
+                resolve(result);
             });
 
         });
