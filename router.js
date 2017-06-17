@@ -106,7 +106,7 @@ function addBdgREST(app) {
             else res.json(building);
         });
     });
-    app.put('/bdg/info:id', function(req, res) {
+    app.put('/bdg/info/:id', function(req, res) {
         var bdgInfo = new Building(req.params.id, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
         ImageProvider.makeThumbnail(req.file.filename);
         DBBdgModule.modifyInfo(req.params.id, bdgInfo);

@@ -55,7 +55,7 @@ exports.getInfo = function(bdgName) {
 
     return connector.query(query).then(function(result) {
         return new Promise(function(resolve, reject) {
-            if (result == undefined) {
+            if (result == undefined || result.buildingIsDeleted == 1) {
                 console.log("getInfo : reject sent");
                 reject(new Building(-1));
             }
@@ -74,7 +74,7 @@ exports.getInfoById = function(bdgId) {
     var query = util.format('SELECT * FROM buildingInfo WHERE buildingId = %d;', bdgId);
     return connector.query(query).then(function(result) {
         return new Promise(function(resolve, reject) {
-            if (result == undefined) reject(new Building(-1));
+            if (result == undefined || result.buildingIsDeleted == 1) reject(new Building(-1));
 
             var building = new Building(result.buildingId, result.buildingName, result.buildingImage, result.buildingLongitude, result.buildingLatitude, result.buildingMsg1);
             console.log(building);
@@ -110,7 +110,7 @@ exports.getImgPath = function(id) {
 };
 
 exports.deleteInfo = function(id) {
-    var query = util.format("UPDATE buildingInfo SET buildingIsDeleted = TRUE WHERE buildingId = %d;", id);
+    var query = util.format("UPDATE buildingInfo SET buildingIsDeleted = 1 WHERE buildingId = %d;", id);
     return connector.queryAll(query).then(function(result) {
         return new Promise(function(resolve, reject) {
             /*Mysql 모듈의 OKPacket*/
