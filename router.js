@@ -79,6 +79,9 @@ function addBdgREST(app) {
     app.post('/bdg', function(req, res) {
         /*null과 undefined가 다른 것에 주의 */
         var bdgInfo = new Building(null, req.body.name, req.file.filename, parseFloat(req.body.longitude), parseFloat(req.body.latitude), "");
+        console.log("get:");
+        console.log(req.body.name);
+        console.log(req.file.filename);
         DBBdgModule.setInfo(bdgInfo);
         res.status(204).send();
     });
