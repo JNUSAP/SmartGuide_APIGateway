@@ -42,8 +42,8 @@ function SuggestInfo(bdgSuggest) {
 
     this.addButton = createElement("button", "w3-button w3-green", this.buttondiv);
 
-    this.AddButton.innerHTML = "추가";
-    this.AddButton.onclick = alert("help!");
+    this.addButton.innerHTML = "추가";
+    this.addButton.onclick = alert("help!");
 
     this.deleteButton = createElement("button", "w3-button w3-red", this.buttondiv)
     this.deleteButton.innerHTML = "삭제";
