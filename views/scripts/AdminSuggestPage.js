@@ -93,12 +93,10 @@ function deleteSuggest(id, element) {
     req.onreadystatechange = function(aEvt) {
         if (req.readyState == 4 && req.status == 200) {
             alert("삭제되었습니다.");
-            element.parentNode.removeChild(element);
-            return 1;
+            return element.parentNode.removeChild(element);
         } else {
-            alert("삭제 중 오류가 발생했습니다.");
             console.log("suggest request err.");
-            return -1;
+            return alert("삭제 중 오류가 발생했습니다.");
         }
     };
 }

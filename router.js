@@ -131,9 +131,9 @@ function addSuggestREST(app) {
     });
     app.delete('/suggestBdg/:id', function(req, res) {
         var id = req.params.id;
-        DBSuggestModule.deleteSuggest(id).then(function(suggest) {
-            if (suggest.suggestId == -1) res.status(404).send();
-            else res.status(200).send();
+        DBSuggestModule.deleteSuggest(id).then(function(isSuccess) {
+            if (isSuccess) res.status(200).send();
+            else res.status(404).send();
         });
     });
 }

@@ -33,6 +33,16 @@ exports.addSuggest = function(suggest) {
     connector.query(query);
 };
 exports.deleteSuggest = function(id) {
-    var query = util.format("UPDATE suggestion SET suggestionIsDelete = TRUE, WHERE idsuggestion = %d;", id);
-    connector.query(query);
+    var query = util.format("UPDATE suggestion SET suggestionIsDelete = 1, WHERE idsuggestion = %d;", id);
+    return connector.query(query).then(function(result) {
+        return new Promise(function(resolve, reject) {
+            if (result == undefined) {
+                reject(false);
+            }
+            resolve(true);
+        });
+    }).catch(function() {
+        console.log("deleteSuggest");
+        return false;
+    });
 };
