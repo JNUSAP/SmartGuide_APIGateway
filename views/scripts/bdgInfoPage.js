@@ -72,7 +72,7 @@ function AppendBdgInfo(id, bdgInfoBoard) {
     getBdgInfo(id, function(bdgDB) {
         /*REST로 건물 정보를 얻은 뒤 호출되는 함수*/
         var bdgInfo = makeBdgInfo(bdgDB);
-        bdgInfoBoard.append(bdginfo);
+        bdgInfoBoard.append(bdgInfo);
     });
 }
 
