@@ -93,8 +93,9 @@ exports.setInfo = function(bdgInfo) {
     var query = util.format('INSERT INTO buildingInfo(buildingName, buildingImage,buildingLongitude, buildingLatitude, buildingMsg1) VALUES (\'%s\', \'%s\',%d, %d, \'%s\');', bdgInfo.buildingName, bdgInfo.buildingImage, bdgInfo.buildingLongitude, bdgInfo.buildingLatitude, bdgInfo.buildingMsg1);
     connector.query(query);
     /*별명 테이블에 본명 갱신 */
-    this.getId(bdgInfo.buildingName).then(function(id) {
-        this.setNickname(id, bdgInfo.buildingName);
+    getId(bdgInfo.buildingName).then(function(id) {
+        console.log(id);
+        setNickname(id, bdgInfo.buildingName);
     });
 };
 exports.modifyInfo = function(id, bdgInfo) {
