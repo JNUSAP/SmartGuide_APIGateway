@@ -34,7 +34,7 @@ exports.addSuggest = function(suggest) {
 };
 exports.deleteSuggest = function(id) {
     var query = util.format("UPDATE suggestion SET suggestionIsDelete = 1 WHERE idsuggestion = %d;", id);
-    return connector.query(query).then(function(result) {
+    return connector.queryAll(query).then(function(result) {
         return new Promise(function(resolve, reject) {
             /*Mysql 모듈의 OKPacket*/
             if (result.affectedRows >= 1) {
