@@ -176,3 +176,18 @@ exports.getNearBdg = function(id) {
         return new Building(-1);
     });
 };
+exports.getDistance = function(start, end) {
+    return new Promise(function(resolve, reject) {
+        var query = util.format('SELECT buildingLatitude,buildingLongitude FROM buildingInfo WHERE buildingId = %d;', start);
+
+        connector.query(query).then(function(startGPS) {
+            var query = util.format('SELECT buildingLatitude,buildingLongitude FROM buildingInfo WHERE buildingId = %d;', end);
+            connector.query(query).then(function(endGPS) {
+                var lat = abs(startGPS.buildingLatitude - endGPS.buildingLatitude);
+                var lng = abs(startGPS.buildingLongitude - endGPS.buildingLongitude);
+                var dist = sqrt(lat ^ 2 + lng ^ 2);
+                resolve(dist);
+            })
+        })
+    });
+}

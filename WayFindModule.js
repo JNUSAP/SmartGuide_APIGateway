@@ -2,13 +2,33 @@ const astar = require("./astar.js");
 
 function makeGraph(startBdgInfo, endBdgInfo) {
     //시작 건물들, 끝 건물들의 인근 건물 정보들을 불러와서 가중치 인접 행렬을 만든다.
-    return new Graph([
-        [],
-        [],
-        []
-    ]);
+    var startId = startBdgInfo.buildingId;
+    var endId = startBdgInfo.buildingId;
+    var queue = [];
+    var currentBdgInfo;
+    var maxCount = 16;
+    var currentCount = 0;
+    while (queue[0] != endId && curretCount < maxCount) {
+        var info = DBBdgModule.getNearBdg(currentId);
+        for (nearBdgId in list) {
+            queue.push(narBdgId);
+        }
+        queue.shift();
+        currentCount++;
+    }
+    var graphCol = [];
+    graphCol.push([]);
+    for (row in graphCol) {
+        row.append[];
+    }
 }
 
+function extendArray(oldgraph, bdgId) {
+    oldgraph.push();
+    for (col in oldgraph) {
+        col.push();
+    }
+}
 exports.wayFind = function(startBdgInfo, endBdgInfo) {
     //Sample Code : https://github.com/bgrins/javascript-astar
     var graphWithWeight = new Graph([
