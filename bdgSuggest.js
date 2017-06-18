@@ -2,7 +2,7 @@ const config = require('./config.json');
 
 function BdgSuggest(id, title, content) {
     /* */
-    if (id === undefined) return new NullSuggest();
+    if (id === undefined || id == -1) return new NullSuggest();
     this.suggestId = id;
     this.suggestTitle = title;
     this.suggestContent = content;
