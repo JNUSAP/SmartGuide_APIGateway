@@ -11,7 +11,7 @@ exports.getSuggest = function(id) {
                 console.log("getSuggest : reject sent");
                 reject(new BdgSuggest(-1));
             }
-            if (result.suggestionIsDelete == 1) return BdgSuggest(undefined);
+            if (result.suggestionIsDelete == 1) return new BdgSuggest(-1);
             var suggest = new BdgSuggest(result.idsuggestion, result.suggestionTitle, result.suggestionText);
             console.log("suggest:");
             console.log(suggest);
