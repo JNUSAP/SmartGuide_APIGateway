@@ -8,7 +8,7 @@ function scrollFill(ev) {
 }
 
 function init() {
-    fill(30);
+    fill(50);
 }
 
 function isBottom() {

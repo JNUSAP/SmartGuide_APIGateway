@@ -138,6 +138,8 @@ function addSuggestREST(app) {
     app.get('/suggestBdg/:id', function(req, res) {
         var id = req.params.id;
         DBSuggestModule.getSuggest(id).then(function(suggest) {
+            console.log("suggestRest");
+            console.log(result);
             if (suggest.suggestId == -1) res.status(404).send();
             else res.json(suggest);
         });
