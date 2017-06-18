@@ -7,11 +7,10 @@ exports.getSuggest = function(id) {
 
     return connector.query(query).then(function(result) {
         return new Promise(function(resolve, reject) {
-            if (result == undefined) {
+            if (result == undefined || result.suggestionIsDelete == 1) {
                 console.log("getSuggest : reject sent");
                 reject(new BdgSuggest(-1));
             }
-            if (result.suggestionIsDelete == 1) return new BdgSuggest(-1);
             var suggest = new BdgSuggest(result.idsuggestion, result.suggestionTitle, result.suggestionText);
             console.log("suggest:");
             console.log(suggest);
