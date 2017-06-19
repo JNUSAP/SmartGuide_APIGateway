@@ -13,8 +13,9 @@ block content
     div(class="nearBdgList")
     
     div(class="centerdiv")
-        input(type="button" margin="auto" name="wayfind" class="searchButton" value="길찾기" onclick="window.open('http://map.daum.net/link/to/"+buildingName+","buildingLatitude+","+buildingLongitude+")")
-        input(type="button" margin="auto" name="search" class="searchButton" value="다음 지도에서 검색" onclick="window.open('http://map.daum.net/link/search/"+buildingName+")")
+        input(type="button" margin="auto" name="wayfind" class="searchButton" value="길찾기")
+        input(type="button" margin="auto" name="search" class="searchButton" value="다음 지도에서 검색")
+    p(id="bdgName" hidden="true") #{buildingName}
     p(id="latitude" hidden="true") #{buildingLatitude}
     p(id="longitude" hidden="true") #{buildingLongitude}
     script(src="//apis.daum.net/maps/maps3.js?apikey=9e7b4f02cc89fa18ab3e9ca9cb7e6898")
@@ -35,13 +36,17 @@ block content
         });
 
         function init(){
-        
+            /*버튼 이벤트*/
+            
             /*건물 정보 검사*/
             if(latitude.innerHTML == "") location.href = '/failed'
             /*건물 정보 로드 완료 대기후 실행*/
             setTimeout(function(){
             var lat = parseFloat(document.getElementById('latitude').innerHTML);
             var long = parseFloat(document.getElementById('longitude').innerHTML);
+            var bdgName = document.getElementById('bdgName').innerHTML;
+            document.getElementsByName("wayfind")[0].onclick=window.open('http://map.daum.net/link/to/'+bdgName+','+lat+','+long);
+            document.getElementsByName("search")[0].onclick=window.open('http://map.daum.net/link/search/'+bdgName;
             var bdgPosition = new daum.maps.LatLng(lat,long);
             console.log(typeof(lat));
             console.log(map.getCenter());
