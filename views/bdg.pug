@@ -13,8 +13,8 @@ block content
     div(class="nearBdgList")
     
     div(class="centerdiv")
-        input(type="button" margin="auto" name="wayfind" class="searchButton" value="길찾기" onclick="window.open('http://map.daum.net/link/to/#{buildingName},#{buildingLatitude}+#{buildingLongitude})")
-        input(type="button" margin="auto" name="search" class="searchButton" value="다음 지도에서 검색" onclick="window.open('http://map.daum.net/link/search/#{buildingName})")
+        input(type="button" margin="auto" name="wayfind" class="searchButton" value="길찾기" onclick="window.open('http://map.daum.net/link/to/"+buildingName+","buildingLatitude+","+buildingLongitude+")")
+        input(type="button" margin="auto" name="search" class="searchButton" value="다음 지도에서 검색" onclick="window.open('http://map.daum.net/link/search/"+buildingName+")")
     p(id="latitude" hidden="true") #{buildingLatitude}
     p(id="longitude" hidden="true") #{buildingLongitude}
     script(src="//apis.daum.net/maps/maps3.js?apikey=9e7b4f02cc89fa18ab3e9ca9cb7e6898")
