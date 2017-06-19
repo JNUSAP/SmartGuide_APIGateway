@@ -34,8 +34,8 @@ block content
 
         function init(){
             /*버튼 이벤트*/
-            wayfind.onclick=window.open('http://map.daum.net/link/to/'+buildingName+','+buildingLatitude+','+buildingLongitude)
-            search.onclick=window.open('http://map.daum.net/link/search/'+buildingName);
+            document.getElementsByName(wayfind)[0].onclick=window.open('http://map.daum.net/link/to/'+buildingName+','+buildingLatitude+','+buildingLongitude)
+            document.getElementsByName(search)[0].onclick=window.open('http://map.daum.net/link/search/'+buildingName);
             
             /*건물 정보 검사*/
             if(latitude.innerHTML == "") location.href = '/failed'
