@@ -46,7 +46,7 @@ block content
             var long = parseFloat(document.getElementById('longitude').innerHTML);
             var bdgName = document.getElementById('bdgName').innerHTML;
             document.getElementsByName("wayfind")[0].onclick=function(){window.open('http://map.daum.net/link/to/'+bdgName+','+lat+','+long)};
-            document.getElementsByName("search")[0].onclick=function(){window.open('http://map.daum.net/link/search/'+bdgName)};
+            document.getElementsByName("search")[0].onclick=function(){window.open('http://map.daum.net/link/search/'+"전남대학교 "+bdgName)};
             var bdgPosition = new daum.maps.LatLng(lat,long);
             console.log(typeof(lat));
             console.log(map.getCenter());
