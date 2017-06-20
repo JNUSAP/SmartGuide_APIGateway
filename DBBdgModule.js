@@ -156,26 +156,30 @@ exports.setNearBdg = function(id, toConnectId) {
     connector.query(query);
 }
 exports.getNearBdg = function(id) {
-    var query = util.format('SELECT * FROM nearBdg WHERE buildingId = %d;', id);
-
-    return connector.queryAll(query).then(function(result) {
-        return new Promise(function(resolve, reject) {
-            if (result == undefined) {
-                console.log("getNearBdg : reject sent");
-                reject(new Building(-1));
-            }
-
-            var nearId = new Array();
-            for (row in result) {
-                nearId.push(row[connectedBdg]);
-            }
-            resolve(nearId);
+    return this.getInfoById(id).then(function(bdgInfo) {
+        const diff = 0.0005;
+        var query = util.format("SELECT * FROM buildingInfo WHERE ABS(buildingLatitude - %d) < %d AND  ABS(buildingLongitude - %d) < %d;", lat, lng, diff, diff);
+        return connector.queryAll(query).then(function(result) {
+            return new Promise(function(resolve, reject) {
+                if (result == undefined) reject(null);
+                var list = {
+                    bdglist: []
+                };
+                for (info in result) {
+                    list.push(info.buildingId);
+                }
+                console.log(list);
+                if (list.length > 0)
+                    resolve(list);
+                else
+                    reject(null);
+            });
+        }).catch(function() {
+            console.log("getNearBdg promised return error");
+            return new Building(-1);
         });
-    }).catch(function() {
-        console.log("getNearBdg promised return error");
-        return new Building(-1);
     });
-};
+}
 exports.getDistance = function(start, end) {
     return new Promise(function(resolve, reject) {
         var query = util.format('SELECT buildingLatitude,buildingLongitude FROM buildingInfo WHERE buildingId = %d;', start);

@@ -130,6 +130,14 @@ function addBdgREST(app) {
             else res.status(404).send();
         });
     });
+    /*인근 건물 정보 */
+    app.get('/bdg/near/:id', function(req, res) {
+        var id = req.params.id;
+        DBBdgModule.getNearBdg(id).then(function(result) {
+            if (result == null) res.status(404).send();
+            else res.json(result);
+        });
+    });
 
 }
 
