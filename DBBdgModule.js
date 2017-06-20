@@ -158,6 +158,8 @@ exports.setNearBdg = function(id, toConnectId) {
 exports.getNearBdg = function(id) {
     return this.getInfoById(id).then(function(bdgInfo) {
         const diff = 0.0005;
+        var lat = bdgInfo.buildingLatitude;
+        var lng = bdgInfo.buildingLongitude;
         var query = util.format("SELECT * FROM buildingInfo WHERE ABS(buildingLatitude - %d) < %d AND  ABS(buildingLongitude - %d) < %d;", lat, lng, diff, diff);
         return connector.queryAll(query).then(function(result) {
             return new Promise(function(resolve, reject) {
