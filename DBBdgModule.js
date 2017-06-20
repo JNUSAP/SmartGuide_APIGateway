@@ -168,7 +168,10 @@ exports.getNearBdg = function(id) {
                     bdglist: []
                 };
                 for (info in result) {
-                    list.bdglist.push(info[buildingId]);
+                    console.log(info)
+                    for (elem in info) {
+                        console.log(elem)
+                    }
                 }
                 console.log(list);
                 if (list.bdglist.length > 0)
