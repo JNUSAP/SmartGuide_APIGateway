@@ -168,17 +168,17 @@ exports.getNearBdg = function(id) {
                     bdglist: []
                 };
                 for (info in result) {
-                    list.push(info.buildingId);
+                    list.bdglist.push(info.buildingId);
                 }
                 console.log(list);
-                if (list.length > 0)
+                if (list.bdglist.length > 0)
                     resolve(list);
                 else
                     reject(null);
             });
         }).catch(function() {
             console.log("getNearBdg promised return error");
-            return new Building(-1);
+            return null;
         });
     });
 }
