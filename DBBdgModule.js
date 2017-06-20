@@ -168,9 +168,13 @@ exports.getNearBdg = function(id) {
                     bdglist: []
                 };
                 for (info in result) {
+                    console.log("ifno");
                     console.log(info)
+                    console.log(typeof(info))
                     for (elem in info) {
+                        console.log("elem");
                         console.log(elem)
+                        console.log(typeof(elem))
                     }
                 }
                 console.log(list);
